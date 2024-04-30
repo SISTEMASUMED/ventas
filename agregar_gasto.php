@@ -7,7 +7,7 @@
 	$active_facturas="";
 	$active_productos="";
 	$active_servicios="";
-    $active_finanzas="active";
+  $active_finanzas="active";
 	$active_clientes="";
 	$active_usuarios="";	
 	$title="SUMED";
@@ -30,97 +30,117 @@
 ?>
 
 <div class="container-fluid">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4><i class='glyphicon glyphicon-edit'></i> <?php echo $usuario;?>Nuevo Gasto</h4>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>
+        <i class="glyphicon glyphicon-edit"></i> <?php echo $usuario;?>Nuevo Gasto</h4>
+    </div>
 
-        </div>
-  <div class="panel-body">
-      <form id="facturacionForm" class="form-horizontal"  method="post" action="nuevo_gasto.php">
-          <div class="form-group row">
-                  <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente O en caso de tener Autorización subir el Ticket o Comprobante</label></center>
-                  <br>
-                    <label class="col-md-1 control-label" for="xml">XML:</label>
-                  <div class="col-md-2">
-                    <input class="form-control input-sm" type="file" accept=".xml" id="xml" name="xml" required class="form-control">
-                  </div>
+    <div class="panel-body">
+      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post">
+        <div class="form-group row">    <!-- primer group -->
+          <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente O en caso de tener Autorización subir el Ticket o Comprobante</label></center>
+          <br>
+            <label class="col-md-1 control-label" for="xml">XML:</label>
+            <div class="col-md-2">
+              <input class="form-control input-sm" type="file" accept=".xml" id="xml" name="xml" required class="form-control">
+            </div>
+            <div class="col-md-1">
 
-                    <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
-                  <div class="col-md-2">
-                    <input class="form-control input-sm" type="file" accept=".png, .jpg, .jpeg" id="autorizacion" name="autorizacion" class="form-control">
-                  </div>
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-1">
+              
             </div>
 
-  <!-- <center><h1 class="titulo-formulario">Formulario de Gasto</h1></center> -->
+            <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
+            <div class="col-md-2">
+              <input class="form-control input-sm" type="file" accept=".png, .jpg, .jpeg" id="autorizacion" name="autorizacion" class="form-control">
+            </div>
+        </div>     <!-- primer group -->
 
-  <div class="form-group row">
-            
-        <div class="form-group">
-          <label for="fecha">Fecha:</label>
-          <input type="text" id="fecha" name="fecha" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="rfc">RFC:</label>
-          <input type="text" id="rfc" name="rfc" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="proveedor">Nombre del Proveedor:</label>
-          <input type="text" id="proveedor" name="proveedor" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="uuid">UUID:</label>
-          <input type="text" id="uuid" name="uuid" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="folio">Folio:</label>
-          <input type="text" id="folio" name="folio" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="referencia">Referencia:</label>
-          <select id="referencia" name="referencia" class="form-control">
-            <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
-            <option value="Pasaje o Transporte">Pasaje o Transporte</option>
-            <option value="Casetas">Casetas</option>
-            <option value="Combustible">Combustible</option>
-            <option value="Hospedaje">Hospedaje</option>
-            <option value="Mensajería">Mensajería</option>
-            <option value="Cortesia (Doctores o Hospitales)">Cortesía (Doctores o Hospitales)</option>
-            <option value="Estacionamiento">Estacionamiento</option>
-            <option value="Papelería y Artículos">Papelería y Artículos</option>
-            <option value="Otros">Otros</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="observacion">Observación:</label>
-          <textarea id="observacion" name="observacion" required class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="subtotal">Subtotal:</label>
-          <input type="text" id="subtotal" name="subtotal" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="iva">IVA:</label>
-          <input type="text" id="iva" name="iva" readonly class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="total">Total:</label>
-            <input type="text" id="total" name="total" readonly class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="pdf">PDF:</label>
-          <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="comprobante">Comprobante:</label>
-          <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control">
-        </div>
-        
+        <hr class="style13">
+
+        <div class="form-group row"> <!-- segundo group -->
+          <label for="proveedor" class="col-sm-3 control-label">Nombre del Proveedor:</label>
+            <div class="col-md-3">
+              <input type="text" id="proveedor" name="proveedor" readonly class="form-control input-sm">
+            </div>
+          <label for="uuid" class="col-sm-1 control-label">UUID:</label>
+            <div class="col-md-3">
+              <input type="text" id="uuid" name="uuid" readonly class="form-control input-sm">
+            </div>
+        </div>     <!-- segundo group -->
+
+        <div class="form-group row"> <!-- tercer group -->
+          <label for="folio" class="col-sm-1 control-label">Folio:</label>
+            <div class="col-md-2">
+              <input type="text" id="folio" name="folio" readonly class="form-control input-sm">
+            </div>
+          <label for="rfc" class="col-sm-1 control-label">RFC:</label>
+            <div class="col-md-2">
+              <input type="text" id="rfc" name="rfc" readonly class="form-control input-sm">
+            </div>
+          <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
+            <div class="col-md-1">
+              <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="<?php echo date("d/m/Y");?>">
+            </div>
+        </div>  <!-- tercer group -->
+
+        <div class="form-group row">    <!-- cuarto group -->
+          <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
+          <div class="col-md-2">
+            <select id="referencia" name="referencia" class="form-control select-sm">
+              <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
+              <option value="Pasaje o Transporte">Pasaje o Transporte</option>
+              <option value="Casetas">Casetas</option>
+              <option value="Combustible">Combustible</option>
+              <option value="Hospedaje">Hospedaje</option>
+              <option value="Mensajería">Mensajería</option>
+              <option value="Cortesia (Doctores o Hospitales)">Cortesía (Doctores o Hospitales)</option>
+              <option value="Estacionamiento">Estacionamiento</option>
+              <option value="Papelería y Artículos">Papelería y Artículos</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+          <label for="subtotal" class="col-sm-1 control-label">Subtotal:</label>
+            <div class="col-md-1">
+              <input type="text" id="subtotal" name="subtotal" readonly class="form-control input-sm">
+            </div>
+          <label for="iva" class="col-sm-1 control-label">IVA:</label>
+            <div class="col-md-1">
+              <input type="text" id="iva" name="iva" readonly class="form-control input-sm">
+            </div>
+          <label for="total" class="col-sm-1 control-label">Total:</label>
+            <div class="col-md-1">
+              <input type="text" id="total" name="total" readonly class="form-control input-sm">
+            </div>
+
+        </div>  <!-- cuarto group -->
+
+        <div class="form-group row">   <!-- quinto group -->
+          <label for="observacion" class="col-sm-1 control-label">Observación:</label>
+            <div class="col-md-3">
+              <textarea id="observacion" name="observacion" required class="form-control textarea-sm"></textarea>
+            </div>
+          <label for="pdf" class="col-sm-1 control-label">PDF:</label>
+            <div class="col-md-2">
+              <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control input-sm">
+            </div>
+        <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
+          <div class="col-md-2">
+            <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control input-sm">
+          </div>
+        </div>  <!-- quinto group -->
+
         <button type="submit" class="btn btn-info">Agregar Gasto</button>
-  </form>
-</div>
-</div>
 
-
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
   document.getElementById('xml').addEventListener('change', handleXMLFile);
