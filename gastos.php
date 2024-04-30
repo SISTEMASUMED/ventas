@@ -7,7 +7,7 @@
     $active_facturas="";
     $active_productos="";
     $active_servicios="";
-    $active_finanzas="active";
+    $active_finanzas="active-link";
     $active_clientes="";
     $active_usuarios="";	
     $title="SUMED";

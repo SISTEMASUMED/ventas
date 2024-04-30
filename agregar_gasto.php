@@ -4,13 +4,14 @@
         header("location: login.php");
 		exit;
         }
-	$active_facturas="";
-	$active_productos="";
-	$active_servicios="";
-  $active_finanzas="active";
-	$active_clientes="";
-	$active_usuarios="";	
-	$title="SUMED";
+        $active_facturas="";
+        $active_productos="";
+        $active_servicios="";
+        $active_finanzas="active-link";
+        $active_clientes="";
+        $active_usuarios="";	
+        $title="SUMED";
+        $usuario = $_SESSION['user_id'];
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -19,16 +20,17 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<?php include("head.php");?>
+<?php 
+include("head.php");?>
 </head>
 <body>
 
 <?php
 	include("navbar.php");
-?>
 
+	?>  
 <div class="container-fluid">
   <div class="panel panel-info">
     <div class="panel-heading">
@@ -64,9 +66,13 @@
         <hr class="style13">
 
         <div class="form-group row"> <!-- segundo group -->
-          <label for="proveedor" class="col-sm-3 control-label">Nombre del Proveedor:</label>
+          <label for="proveedor" class="col-sm-1 control-label">Nombre del Proveedor:</label>
             <div class="col-md-3">
               <input type="text" id="proveedor" name="proveedor" readonly class="form-control input-sm">
+            </div>
+            <label for="rfc" class="col-sm-1 control-label">RFC:</label>
+            <div class="col-md-2">
+              <input type="text" id="rfc" name="rfc" readonly class="form-control input-sm">
             </div>
           <label for="uuid" class="col-sm-1 control-label">UUID:</label>
             <div class="col-md-3">
@@ -79,13 +85,10 @@
             <div class="col-md-2">
               <input type="text" id="folio" name="folio" readonly class="form-control input-sm">
             </div>
-          <label for="rfc" class="col-sm-1 control-label">RFC:</label>
-            <div class="col-md-2">
-              <input type="text" id="rfc" name="rfc" readonly class="form-control input-sm">
-            </div>
+          
           <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
             <div class="col-md-1">
-              <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="<?php echo date("d/m/Y");?>">
+              <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
             </div>
         </div>  <!-- tercer group -->
 
@@ -135,7 +138,7 @@
           </div>
         </div>  <!-- quinto group -->
 
-        <button type="submit" class="btn btn-info">Agregar Gasto</button>
+        <button type="submit" style="margin-left:80%;" class="btn btn-info">Agregar Gasto</button>
 
       </form>
     </div>
@@ -152,7 +155,11 @@
       const xmlContent = e.target.result;
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
-      document.getElementById('fecha').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
+      //hay que formatear la fecha para que aparezca de forma correcta al cargar el xml
+      var fecha= xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
+      var fechaFormateada=moment(fecha).format('DD/MM/YYYY');
+      //document.getElementById('fecha').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
+      document.getElementById('fecha').value = fechaFormateada;
       document.getElementById('rfc').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Rfc');
       document.getElementById('proveedor').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Nombre');
       document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');

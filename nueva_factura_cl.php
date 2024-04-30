@@ -27,7 +27,7 @@
 				$id_cliente=$rw_factura['id_cliente'];
 				$nombre_cliente=$rw_factura['nombre_cliente'];
 				$calle=$rw_factura['calle'];
-				$colonia=$rw_factura['colonia'];
+				$colonia=$rw_factura['colonia'];                                                                               
 				$num_ext=$rw_factura['numext'];
 				$rfc=$rw_factura['rfc'];
 				$telefono_cliente=$rw_factura['telefono'];
