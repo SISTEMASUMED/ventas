@@ -1,0 +1,57 @@
+$(document).ready(function(){
+    load(1);
+    
+});
+
+function load(page){
+    var q= $("#q").val();
+    $("#loader").fadeIn('slow');
+    $.ajax({
+        url:'./ajax/buscar_servicios.php?action=ajax&page='+page+'&q='+q,
+         beforeSend: function(objeto){
+         $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+      },
+        success:function(data){
+
+            $(".outer_div").html(data).fadeIn('slow');
+            $('#loader').html('');
+            $('[data-toggle="tooltip"]').tooltip({html:true}); 
+            
+        }
+    })
+}
+
+    function eliminar (id)
+{
+    var q= $("#q").val();
+if (confirm("Realmente deseas cancelar la remision?")){	
+$.ajax({
+type: "GET",
+url: "./ajax/buscar_servicios.php",
+data: "id="+id,"q":q,
+ beforeSend: function(objeto){
+    $("#resultados").html("Mensaje: Cargando...");
+  },
+success: function(datos){
+$("#resultados").html(datos);
+load(1);
+}
+    });
+}
+}
+
+function imprimir_factura(id_servicio, numero_servicio){
+    VentanaCentrada('./pdf/documentos/imprimir_servicio.php?id_servicio='+id_servicio+'&numero_servicio='+numero_servicio);
+}
+function ver_factura(id_servicio, numero_servicio){
+    VentanaCentrada('./pdf/documentos/ver_servicio.php?id_servicio='+id_servicio+'&numero_servicio='+numero_servicio);
+}
+function ver_consumo(id_servicio, numero_servicio){
+    VentanaCentrada('./pdf/documentos/ver_consumo.php?id_servicio='+id_servicio+'&numero_servicio='+numero_servicio);
+}
+function imprimir_consumo(id_servicio, numero_servicio){
+    VentanaCentrada('./pdf/documentos/imprimir_consumo.php?id_servicio='+id_servicio+'&numero_servicio='+numero_servicio);
+}
+function descargar(id_servicio, numero_servicio){
+    VentanaCentrada('./pdf/documentos/ver_servicio_excel.php?id_servicio='+id_servicio+'&numero_servicio='+numero_servicio);
+}
