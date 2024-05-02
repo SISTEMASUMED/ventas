@@ -47,15 +47,15 @@ if ($row_check['count'] > 0) {
   $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total)
   VALUES ('$fecha', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total')";
 
-  if ($conn->query($sql) === TRUE) {
+  if ($con->query($sql) === TRUE) {
     // Mostrar alerta de éxito
     echo "<script>alert('Datos guardados exitosamente.'); window.location.href = 'gastos.php';</script>";
   } else {
     // Mostrar alerta de error
-    echo "<script>alert('Error al guardar los datos: " . $conn->error . "');</script>";
+    echo "<script>alert('Error al guardar los datos: " . $con->error . "');</script>";
   }
 }
 
 // Cerrar conexión
-$conn->close();
+$con->close();
 ?>
