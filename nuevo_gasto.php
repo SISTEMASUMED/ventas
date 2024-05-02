@@ -23,7 +23,7 @@ if ($con->connect_error) {
 }
 
 // Obtener datos del formulario
-$fecha = $_POST['fecha'];
+$fecha = mysqli_real_escape_string($con, $_POST['fecha']);
 $rfc = $_POST['rfc'];
 $proveedor = $_POST['proveedor'];
 $uuid = $_POST['uuid'];
