@@ -98,7 +98,7 @@ include("head.php");?>
               <option value="Estacionamiento">Estacionamiento</option>
               <option value="Papelería y Artículos">Papelería y Artículos</option>
               <option value="Otros">Otros</option>
-            </select>
+            </select required>
           </div>
           <label for="folio" class="col-sm-1 control-label">Folio:</label>
             <div class="col-md-2">
