@@ -23,7 +23,7 @@ if ($con->connect_error) {
 }
 
 // Obtener datos del formulario
-$fecha = mysqli_real_escape_string($con, $_POST['fecha']);
+$fecha = $_POST['fecha'];
 $rfc = $_POST['rfc'];
 $proveedor = $_POST['proveedor'];
 $uuid = $_POST['uuid'];
@@ -33,6 +33,10 @@ $observacion = $_POST['observacion'];
 $subtotal = $_POST['subtotal'];
 $iva = $_POST['iva'];
 $total = $_POST['total'];
+
+
+$fechaFormateada = $_POST['fechaFormateada'];
+
 
 // Verificar si ya existe un registro con el mismo UUID
 $sql_check = "SELECT COUNT(*) AS count FROM finanzas WHERE uuid = '$uuid'";
@@ -45,7 +49,7 @@ if ($row_check['count'] > 0) {
 } else {
   // Insertar datos en la base de datos si no existe un registro con el mismo UUID
   $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total)
-  VALUES ('$fecha', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total')";
+  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total')";
 
   if ($con->query($sql) === TRUE) {
     // Mostrar alerta de éxito

@@ -77,6 +77,7 @@ include("head.php");?>
             <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
             <div class="col-md-2">
               <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
+              <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="">
             </div>
          
         </div>     <!-- segundo group -->
