@@ -74,27 +74,17 @@ include("head.php");?>
             <div class="col-md-2">
               <input type="text" id="rfc" name="rfc" readonly class="form-control input-sm">
             </div>
-          <label for="uuid" class="col-sm-1 control-label">UUID:</label>
-            <div class="col-md-3">
-              <input type="text" id="uuid" name="uuid" readonly class="form-control input-sm">
+            <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
+            <div class="col-md-2">
+              <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
             </div>
+         
         </div>     <!-- segundo group -->
 
         <div class="form-group row"> <!-- tercer group -->
-          <label for="folio" class="col-sm-1 control-label">Folio:</label>
-            <div class="col-md-2">
-              <input type="text" id="folio" name="folio" readonly class="form-control input-sm">
-            </div>
-          
-          <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
-            <div class="col-md-1">
-              <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
-            </div>
-        </div>  <!-- tercer group -->
 
-        <div class="form-group row">    <!-- cuarto group -->
-          <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
-          <div class="col-md-2">
+        <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
+          <div class="col-md-3">
             <select id="referencia" name="referencia" class="form-control select-sm">
               <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
               <option value="Pasaje o Transporte">Pasaje o Transporte</option>
@@ -108,37 +98,51 @@ include("head.php");?>
               <option value="Otros">Otros</option>
             </select>
           </div>
+          <label for="folio" class="col-sm-1 control-label">Folio:</label>
+            <div class="col-md-2">
+              <input type="text" id="folio" name="folio" readonly class="form-control input-sm">
+            </div>
+          
+            <label for="uuid" class="col-sm-1 control-label">UUID:</label>
+            <div class="col-md-2">
+              <input type="text" id="uuid" name="uuid" readonly class="form-control input-sm">
+            </div>
+        </div>  <!-- tercer group -->
+
+        <div class="form-group row">    <!-- cuarto group -->
+         
           <label for="subtotal" class="col-sm-1 control-label">Subtotal:</label>
-            <div class="col-md-1">
+            <div class="col-md-3">
               <input type="text" id="subtotal" name="subtotal" readonly class="form-control input-sm">
             </div>
           <label for="iva" class="col-sm-1 control-label">IVA:</label>
-            <div class="col-md-1">
+            <div class="col-md-2">
               <input type="text" id="iva" name="iva" readonly class="form-control input-sm">
             </div>
           <label for="total" class="col-sm-1 control-label">Total:</label>
-            <div class="col-md-1">
+            <div class="col-md-2">
               <input type="text" id="total" name="total" readonly class="form-control input-sm">
             </div>
 
         </div>  <!-- cuarto group -->
 
         <div class="form-group row">   <!-- quinto group -->
-          <label for="observacion" class="col-sm-1 control-label">Observación:</label>
-            <div class="col-md-3">
-              <textarea id="observacion" name="observacion" required class="form-control textarea-sm"></textarea>
-            </div>
+          
           <label for="pdf" class="col-sm-1 control-label">PDF:</label>
-            <div class="col-md-2">
+            <div class="col-md-3">
               <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control input-sm">
             </div>
         <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
             <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control input-sm">
           </div>
+          <label for="observacion" class="col-sm-1 control-label">Observación:</label>
+            <div class="col-md-2">
+              <textarea id="observacion" name="observacion" required class="form-control textarea-sm"></textarea>
+            </div>
         </div>  <!-- quinto group -->
 
-        <button type="submit" style="margin-left:80%;" class="btn btn-info">Agregar Gasto</button>
+        <button type="submit" style="margin-left:30%; margin-top:2%;" class="btn  btn-info">Agregar Gasto</button>
 
       </form>
     </div>
@@ -164,9 +168,9 @@ include("head.php");?>
       document.getElementById('proveedor').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Nombre');
       document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');
       document.getElementById('folio').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Folio');
-      document.getElementById('subtotal').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('SubTotal');
-      document.getElementById('iva').value = xmlDoc.getElementsByTagName('cfdi:Traslado')[0].getAttribute('Importe');
-      document.getElementById('total').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Total');
+      document.getElementById('subtotal').value = '$'+ xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('SubTotal');
+      document.getElementById('iva').value = '$'+ xmlDoc.getElementsByTagName('cfdi:Traslado')[0].getAttribute('Importe');
+      document.getElementById('total').value = '$'+ xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Total');
     };
     reader.readAsText(file);
   }
