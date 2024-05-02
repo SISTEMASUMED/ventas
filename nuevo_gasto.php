@@ -1,16 +1,25 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
+      header("location: login.php");
+  exit;
+      }
+
+      require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+      require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
+      
 // Configuración de la conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "remisiones";
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "remisiones";
 
 // Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+// $con = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
 if ($conn->connect_error) {
-  die("Error de conexión a la base de datos: " . $conn->connect_error);
+  die("Error de conexión a la base de datos: " . $con->connect_error);
 }
 
 // Obtener datos del formulario
