@@ -86,6 +86,7 @@ include("head.php");?>
         <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
           <div class="col-md-3">
             <select id="referencia" name="referencia" class="form-control select-sm">
+              <option value="" selected disabled>--Selecciona una opción--</option>
               <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
               <option value="Pasaje o Transporte">Pasaje o Transporte</option>
               <option value="Casetas">Casetas</option>
