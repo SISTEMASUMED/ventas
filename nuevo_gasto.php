@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
 // $con = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
-if ($conn->connect_error) {
+if ($con->connect_error) {
   die("Error de conexión a la base de datos: " . $con->connect_error);
 }
 
@@ -36,7 +36,7 @@ $total = $_POST['total'];
 
 // Verificar si ya existe un registro con el mismo UUID
 $sql_check = "SELECT COUNT(*) AS count FROM finanzas WHERE uuid = '$uuid'";
-$result_check = $conn->query($sql_check);
+$result_check = $con->query($sql_check);
 $row_check = $result_check->fetch_assoc();
 
 if ($row_check['count'] > 0) {
