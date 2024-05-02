@@ -77,7 +77,7 @@ include("head.php");?>
             <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
             <div class="col-md-2">
               <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
-              <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="">
+              <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="<?php echo $fechaFormateada; ?>">
             </div>
          
         </div>     <!-- segundo group -->
@@ -166,6 +166,7 @@ include("head.php");?>
       var fechaFormateada=moment(fecha).format('DD/MM/YYYY');
       //document.getElementById('fecha').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
       document.getElementById('fecha').value = fechaFormateada;
+      document.getElementById('fechaFormateada').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
       document.getElementById('rfc').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Rfc');
       document.getElementById('proveedor').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Nombre');
       document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');

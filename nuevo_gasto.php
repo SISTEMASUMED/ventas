@@ -23,7 +23,7 @@ if ($con->connect_error) {
 }
 
 // Obtener datos del formulario
-$fecha = $_POST['fecha'];
+// $fecha = $_POST['fecha'];
 $rfc = $_POST['rfc'];
 $proveedor = $_POST['proveedor'];
 $uuid = $_POST['uuid'];
@@ -45,8 +45,8 @@ if ($row_check['count'] > 0) {
   echo "<script>alert('Ya existe una factura con el mismo UUID. No se puede facturar dos veces la misma factura.'); window.location.href = 'gastos.php';</script>";
 } else {
   // Insertar datos en la base de datos si no existe un registro con el mismo UUID
-  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total)
-  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total')";
+  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status)
+  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1)";
 
   if ($con->query($sql) === TRUE) {
     // Mostrar alerta de éxito
