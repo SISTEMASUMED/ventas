@@ -180,93 +180,97 @@ include("head.php");?>
 
   document.addEventListener("DOMContentLoaded", function() {
     var facturacionForm = document.getElementById("facturacionForm");
-    facturacionForm.addEventListener("submit", function(event) {
-      var xmlFile = document.getElementById("xml").files[0];
-      var pdfFile = document.getElementById("pdf").files[0];
-      var autorizacionFile = document.getElementById("autorizacion").files[0];
-      var comprobanteFile = document.getElementById("comprobante").files[0];
-
-      // Si se ha seleccionado un XML, se requiere el PDF
-      if (xmlFile && !pdfFile) {
-        event.preventDefault();
-        alert("Por favor, adjunta el PDF correspondiente al XML.");
-      }
-
-      // Si se ha seleccionado una autorización, se requiere el comprobante
-      if (autorizacionFile && !comprobanteFile) {
-        event.preventDefault();
-        alert("Por favor, adjunta el comprobante correspondiente a la autorización.");
-      }
-    });
-  });
-
-
-  document.addEventListener("DOMContentLoaded", function() {
     var xmlInput = document.getElementById("xml");
-    var autorizacionInput = document.getElementById("autorizacion");
-    var comprobanteInput = document.getElementById("comprobante");
-
-    xmlInput.addEventListener("change", function() {
-      if (xmlInput.files.length > 0) {
-        // Si se selecciona un XML, deshabilita el campo de autorización y comprobante
-        autorizacionInput.disabled = true;
-        comprobanteInput.disabled = true;
-      } else {
-        // Si no se selecciona un XML, habilita el campo de autorización y comprobante
-        autorizacionInput.disabled = false;
-        comprobanteInput.disabled = false;
-      }
-    });
-
-    autorizacionInput.addEventListener("change", function() {
-      if (autorizacionInput.files.length > 0) {
-        // Si se selecciona una autorización, deshabilita el campo de XML y comprobante
-        xmlInput.disabled = true;
-        pdfFile.disabled = true;
-      } else {
-        // Si no se selecciona una autorización, habilita el campo de XML y comprobante
-        xmlInput.disabled = false;
-        pdfFile.disabled = false;
-      }
-    });
-
-    comprobanteInput.addEventListener("change", function() {
-      if (comprobanteInput.files.length > 0) {
-        // Si se selecciona un comprobante, deshabilita el campo de XML y autorización
-        xmlInput.disabled = true;
-        autorizacionInput.disabled = true;
-      } else {
-        // Si no se selecciona un comprobante, habilita el campo de XML y autorización
-        xmlInput.disabled = false;
-        autorizacionInput.disabled = false;
-      }
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    var xmlInput = document.getElementById("xml");
+    var pdfInput = document.getElementById("pdf");
     var autorizacionInput = document.getElementById("autorizacion");
     var comprobanteInput = document.getElementById("comprobante");
     var referenciaSelect = document.getElementById("referencia");
-    var observacionTextarea = document.getElementById("observacion");
+
+    facturacionForm.addEventListener("submit", function(event) {
+        if (xmlInput.files.length > 0 && pdfInput.files.length === 0) {
+            event.preventDefault();
+            alert("Por favor, adjunta el PDF correspondiente al XML.");
+        }
+        if (autorizacionInput.files.length > 0 && comprobanteInput.files.length === 0) {
+            event.preventDefault();
+            alert("Por favor, adjunta el comprobante correspondiente a la autorización.");
+        }
+    });
+
+    xmlInput.addEventListener("change", function() {
+        if (xmlInput.files.length > 0) {
+            pdfInput.disabled = false;
+            comprobanteInput.disabled = true;
+            autorizacionInput.disabled = true;
+
+            // Limpiar campos si se selecciona primero el XML y luego la autorización
+            proveedorInput.value = ""; // Limpiar el campo de proveedor
+            rfcInput.value = ""; // Limpiar el campo de RFC
+
+        } else {
+            pdfInput.disabled = true;
+            comprobanteInput.disabled = false;
+            autorizacionInput.disabled = false;
+        }
+    });
 
     autorizacionInput.addEventListener("change", function() {
-      if (autorizacionInput.files.length > 0) {
-        // Si se selecciona una autorización, deshabilita todos los campos excepto el de observación
-        xmlInput.disabled = true;
-        comprobanteInput.disabled = true;
-        referenciaSelect.disabled = true;
-        referenciaSelect.value = "Otros"; // Selecciona automáticamente "Otros" en el campo de referencia
-        observacionTextarea.value = ""; // Llena la observación con un mensaje
-      } else {
-        // Si no se selecciona una autorización, habilita todos los campos
-        xmlInput.disabled = false;
-        comprobanteInput.disabled = true;
-        referenciaSelect.disabled = false;
-        observacionTextarea.value = ""; // Limpia la observación
-      }
+        if (autorizacionInput.files.length > 0) {
+            comprobanteInput.disabled = false;
+            xmlInput.disabled = true;
+            pdfInput.disabled = true;
+            referenciaSelect.value = "Otros"; // Selecciona automáticamente "Otros" en el campo de referencia
+        } else {
+            comprobanteInput.disabled = true;
+            xmlInput.disabled = false;
+            pdfInput.disabled = false;
+            referenciaSelect.value = ""; // Limpia la selección en el campo de referencia
+        }
     });
-  });
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+    var xmlInput = document.getElementById("xml");
+
+    xmlInput.addEventListener("change", function() {
+        if (!xmlInput.files || xmlInput.files.length === 0) {
+            limpiarCampos();
+        }
+    });
+});
+
+
+function limpiarCampos() {
+    // Limpiar campos de entrada de texto
+    document.getElementById("proveedor").value = "";
+    document.getElementById("rfc").value = "";
+    document.getElementById("fecha").value = "";
+    document.getElementById("fechaFormateada").value = "";
+    document.getElementById("folio").value = "";
+    document.getElementById("uuid").value = "";
+    document.getElementById("subtotal").value = "";
+    document.getElementById("iva").value = "";
+    document.getElementById("total").value = "";
+    document.getElementById("observacion").value = "";
+
+    // Reiniciar selección de archivos
+    document.getElementById("pdf").value = "";
+    document.getElementById("autorizacion").value = "";
+    document.getElementById("comprobante").value = "";
+
+    // Reiniciar selección en el campo de referencia
+    document.getElementById("referencia").value = "";
+
+    // Habilitar campos de autorización y comprobante
+    document.getElementById("autorizacion").disabled = false;
+    document.getElementById("comprobante").disabled = false;
+
+    // Deshabilitar campos de PDF
+    document.getElementById("pdf").disabled = true;
+}
+
+
+
 </script>
 
 </body>
