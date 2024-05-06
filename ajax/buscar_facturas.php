@@ -148,6 +148,7 @@ if ($rj_usuario1['is_admin']!=2){
 						$estado_factura=$row['estado_factura'];
 						/*if ($estado_factura==1){$text_estado="Pagada";$label_class='label-success';}
 						else{$text_estado="Pendiente";$label_class='label-warning';}*/
+
 						if($estado_factura==1){
 							$factura_status = "<span class='label label-info'>SIN FACTURAR</span>";
 						}else if ($estado_factura==0){
@@ -166,7 +167,7 @@ if ($rj_usuario1['is_admin']!=2){
 							}else{
 								$status_fact="CANCELADA";
 							} 	
-							////////////////////////////
+				////////////////////////////
 			
 							
 					?>
@@ -182,9 +183,9 @@ if ($rj_usuario1['is_admin']!=2){
 
 						<td>
 						<?php
-						if ($rj_usuario['is_admin']==1){
+						if ($rj_usuario['is_admin']==1 || $rj_usuario['is_admin']==2 ){
 						echo		
-						"<a href='./nueva_factura_cl.php?id_factura=".$id_factura."' class='btn btn-default' title='Clonar factura' ><i class='glyphicon glyphicon-retweet'></i></a>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+						"<a href='./ajax/clonar_factura.php?id_factura=".$id_factura."' class='btn btn-default' title='Clonar factura' ><i class='glyphicon glyphicon-retweet'></i></a>";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 						}?>
 						</td>
 						<td class="hidden-xs columnas"><?php echo $status_fact; ?></td>
@@ -199,12 +200,12 @@ if ($rj_usuario1['is_admin']!=2){
 	
 	<td class="columnas">				
 <?php
-/////////////////////////////
 $consulta_bloqueo=mysqli_query($con,"SELECT facturas.id_factura, facturas.bloqueo, facturas.id_vendedor from facturas where id_factura = '$id_factura' " );
 			$rj_bloqueo=mysqli_fetch_array($consulta_bloqueo);
 			$bloqueo=$rj_bloqueo['bloqueo'];
 			$id_ventas=$rj_bloqueo['id_vendedor'];
 			if($bloqueo == 1){
+
 				$estilo="style='background-color:#FF5B33;border:none;box-shadow: 1px 2px 1px black;'";
 				$href="";
 				$href2="";
@@ -267,7 +268,6 @@ if ($rj_usuario['is_admin']==1){
 	}
 
 			?>		
-					
 					<?php
 				}
 				?>

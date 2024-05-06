@@ -109,25 +109,26 @@
 
 
 
-					<input type="hidden" value="<?php echo $estado_factura;?>" id="estado<?php echo $id_factura;?>">
+					<!-- <input type="hidden" value="<?php echo $estado_factura;?>" id="estado<?php echo $id_factura;?>">
 					
 					<tr>
 						<td class="columnas"><ul><li><?php echo substr($nombre_cliente,0,25);?></li><li><?php echo $letra_ventas."-".$numero_servicio; ?></li></td>
 						<td class="hidden-xs "><?php echo $fecha; ?></td>
 						<td class="hidden-xs "><?php echo $expediente; ?></td>
 						<td class="hidden-xs columnas"><?php echo $paciente; ?></td>	
-						<td class="hidden-xs "><?php echo $nombre_vendedor; ?></td>
+						<td class="hidden-xs "><?php echo $nombre_vendedor; ?></td> -->
 					<?php 
-							if($estado_servicio==1){
+							// if($estado_servicio==1){
 								
-								$factura_status = "<span class='label label-info'>SIN FACTURAR</span>";
-							}else{
-								$factura_status = "<span class='label label-success'>FACTURADA</span>";
-							}
+							// 	$factura_status = "<span class='label label-info'>SIN FACTURAR</span>";
+							// }else{
+							// 	$factura_status = "<span class='label label-success'>FACTURADA</span>";
+							// }
 					?>
-						<td class="hidden-xs columnas"><?php echo $factura_status; ?></td>
-							<td>
-				<?php				
+						<!-- <td class="hidden-xs columnas"><?php echo $factura_status; ?></td>
+							<td> -->
+				<?php
+								
 $session_id = $_SESSION["user_id"];
 $sql_usuario=mysqli_query($con,"select * from users where user_id ='$session_id'");
 $rj_usuario=mysqli_fetch_array($sql_usuario);
