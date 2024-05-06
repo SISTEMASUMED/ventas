@@ -8,16 +8,7 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
       require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
       require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
       
-// Configuración de la conexión a la base de datos
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "remisiones";
 
-// Crear conexión
-// $con = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
 if ($con->connect_error) {
   die("Error de conexión a la base de datos: " . $con->connect_error);
 }

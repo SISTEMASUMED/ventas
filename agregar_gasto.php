@@ -134,7 +134,7 @@ include("head.php");?>
             <div class="col-md-3">
               <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control input-sm">
             </div>
-        <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
+          <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
             <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control input-sm">
           </div>
@@ -272,6 +272,10 @@ function limpiarCampos() {
 
 
 </script>
+
+  <?php
+	  include("footer.php");
+	?>
 
 </body>
 </html>

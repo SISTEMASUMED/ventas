@@ -52,10 +52,6 @@
 			<h4><i class='glyphicon glyphicon-search'></i> Buscar Gasto</h4>
 		</div>
 
-
-
-
-
 <?php
 
 $sql = "SELECT * FROM finanzas";
@@ -96,13 +92,25 @@ if ($result->num_rows > 0) {
         echo "<td>$" . number_format($row["iva"],2,".",",") . "</td>";
         echo "<td>$" . number_format($row["total"],2,".",",") . "</td>";
         // Agregar enlace de descarga para cada fila
-        echo 
-        "<td>
-            <a href='descargar_excel.php?id=" . $row["id"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>
-            <a href='detalle_gasto.php?id=" . $row["id"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>
-            <a href='editar_gasto.php?id=" . $row["id"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>
-            <a href='eliminar_gasto.php?id=" . $row["id"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>
-        </td>";
+        echo "<td>";
+
+            if ($rw_usuario['is_admin'] == 1) {
+                // Admin todas las opciones
+                echo "<a href='descargar_excel_gasto.php?id=" . $row["id"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id=" . $row["id"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id=" . $row["id"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+                echo "<a href='eliminar_gasto.php?id=" . $row["id"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
+            } elseif ($rw_usuario['is_admin'] == 2) {
+                // Ventas editar y ver
+                echo "<a href='detalle_gasto.php?id=" . $row["id"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id=" . $row["id"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+            } elseif ($rw_usuario['is_admin'] == 5) {
+                // Finanzas ver y descargar
+                echo "<a href='descargar_excel_gasto.php?id=" . $row["id"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id=" . $row["id"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+            }
+
+        echo "</td>";
     }
     echo "</table>";
 } else {
@@ -115,6 +123,10 @@ if ($result->num_rows > 0) {
     var tabla = document.querySelector("#myTable");
     var dataTable = new DataTable(tabla);
 </script>
+
+    <?php
+	    include("footer.php");
+	?>
 
 </body>
 </html>

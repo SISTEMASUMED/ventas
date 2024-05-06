@@ -35,9 +35,9 @@
                         </li>-->
 
                         <?php
-                        $session_id = $_SESSION["user_id"];
-          $sql_usuario=mysqli_query($con,"select * from users where user_id ='$session_id'");
-          $rw_usuario=mysqli_fetch_array($sql_usuario);
+                            $session_id = $_SESSION["user_id"];
+                            $sql_usuario=mysqli_query($con,"select * from users where user_id ='$session_id'");
+                            $rw_usuario=mysqli_fetch_array($sql_usuario);
                         if ($rw_usuario['is_admin']==2 || $rw_usuario['is_admin']==5){
                         }else{
                             echo
