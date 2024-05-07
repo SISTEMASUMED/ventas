@@ -54,7 +54,7 @@
 
 <?php
 
-$sql = "SELECT * FROM finanzas";
+$sql = "SELECT * FROM finanzas WHERE status=1";
 $result = $con->query($sql);
 
 

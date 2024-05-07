@@ -25,6 +25,7 @@ $subtotal = $_POST['subtotal'];
 $iva = $_POST['iva'];
 $total = $_POST['total'];
 $fechaFormateada = $_POST['fechaFormateada'];
+$status = $_POST['status'];
 
 // Verificar si ya existe un registro con el mismo UUID
 $sql_check = "SELECT COUNT(*) AS count FROM finanzas WHERE uuid = '$uuid'";

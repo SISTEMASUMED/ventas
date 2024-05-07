@@ -38,16 +38,15 @@
                             $session_id = $_SESSION["user_id"];
                             $sql_usuario=mysqli_query($con,"select * from users where user_id ='$session_id'");
                             $rw_usuario=mysqli_fetch_array($sql_usuario);
-                        if ($rw_usuario['is_admin']==2 || $rw_usuario['is_admin']==5){
-                        }else{
+                        if ($rw_usuario['is_admin']==1 || $rw_usuario['is_admin']==2 || $rw_usuario['is_admin']==5){
                             echo
-                            "
-                        <li class='nav__item'>
-                            <a href='gastos.php' class='nav__link ".$active_finanzas."'>
-                                <i class='bx bx-credit-card-alt nav__icon'></i>
-                                <span class='nav__name'>GASTOS</span>
-                            </a>
-                        </li>";
+                                "
+                            <li class='nav__item'>
+                                <a href='gastos.php' class='nav__link ".$active_finanzas."'>
+                                    <i class='bx bx-credit-card-alt nav__icon'></i>
+                                    <span class='nav__name'>GASTOS</span>
+                                </a>
+                            </li>";
                         }
                         ?>
 
