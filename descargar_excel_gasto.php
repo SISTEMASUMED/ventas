@@ -28,7 +28,18 @@ header("Content-Disposition: attachment; filename=gasto_$id_gasto.xls");
 
 // Inicio del documento HTML
 echo "<table border='1'>";
-echo "<tr><th>Fecha</th><th>RFC</th><th>Nombre del Proveedor</th><th>UUID</th><th>Folio</th><th>Referencia</th><th>Observación</th><th>Subtotal</th><th>IVA</th><th>Total</th></tr>";
+echo    "<tr>
+            <th>Fecha</th>
+            <th>RFC</th>
+            <th>Nombre del Proveedor</th>
+            <th>UUID</th>
+            <th>Folio</th>
+            <th>Referencia</th>
+            <th>Observación</th>
+            <th>Subtotal</th>
+            <th>IVA</th>
+            <th>Total</th>
+        </tr>";
 
 // Datos del gasto
 echo "<tr>";

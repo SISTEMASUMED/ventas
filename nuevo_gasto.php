@@ -25,7 +25,10 @@ $subtotal = $_POST['subtotal'];
 $iva = $_POST['iva'];
 $total = $_POST['total'];
 $fechaFormateada = $_POST['fechaFormateada'];
-$status = $_POST['status'];
+$status = $_POST['status']; 
+$xml = $_POST['xml'];
+$pdf = $_POST['pdf'];
+
 
 // Verificar si ya existe un registro con el mismo UUID
 $sql_check = "SELECT COUNT(*) AS count FROM finanzas WHERE uuid = '$uuid'";
@@ -37,8 +40,10 @@ if ($row_check['count'] > 0) {
   echo "<script>alert('Ya existe una factura con el mismo UUID. No se puede facturar dos veces la misma factura.'); window.location.href = 'gastos.php';</script>";
 } else {
   // Insertar datos en la base de datos si no existe un registro con el mismo UUID
-  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status)
-  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1)";
+                                                          //Datos de la tabla sql head
+  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status, xml_path, pdf_path)
+  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1, '$xml', '$pdf ')";
+                                                          //Variables del POST 
 
   if ($con->query($sql) === TRUE) {
     // Mostrar alerta de éxito
