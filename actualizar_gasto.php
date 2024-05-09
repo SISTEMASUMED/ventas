@@ -38,7 +38,7 @@ $sql .= "subtotal = '$subtotal', ";
 $sql .= "iva = '$iva', ";
 $sql .= "total = '$total', ";
 $sql .= "observacion = '$observacion' ";
-$sql .= " WHERE id = $id";
+$sql .= " WHERE id_finanza = $id";
 
 
 

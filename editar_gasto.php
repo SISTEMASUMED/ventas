@@ -23,10 +23,10 @@
 
 <?php
 
-$id = $_GET['id']; 
+$id = $_GET['id_finanza']; 
 
 // Obtener los detalles del gasto
-$sql = "SELECT * FROM finanzas WHERE id = $id";
+$sql = "SELECT * FROM finanzas WHERE id_finanza = $id";
 $result = $con->query($sql);
 
 if ($result->num_rows > 0) {
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
             <div class="panel-body">
             <h2>Editar Gasto</h2>
         <form id="editarGastoForm" class="form-horizontal" action="actualizar_gasto.php" method="post">
-            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $row['id_finanza']; ?>">
             <div class="form-group row">
                 <label class="col-md-1 control-label" for="xml">XML:</label>
                 <div class="col-md-2">

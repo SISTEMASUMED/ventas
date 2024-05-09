@@ -12,14 +12,14 @@ include("config/db.php");
 include("config/conexion.php");
 
 // Verificar si se ha proporcionado un ID válido
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+if (!isset($_GET['id_finanza']) || !is_numeric($_GET['id_finanza'])) {
     die("ID de gasto no válido.");
 }
 
-$id_gasto = intval($_GET['id']);
+$id_gasto = intval($_GET['id_finanza']);
 
 // Obtener los datos del gasto
-$sql_gasto = mysqli_query($con, "SELECT * FROM finanzas WHERE id = $id_gasto");
+$sql_gasto = mysqli_query($con, "SELECT * FROM finanzas WHERE id_finanza = $id_gasto");
 $rw_gasto = mysqli_fetch_array($sql_gasto);
 
 // Crear un archivo Excel

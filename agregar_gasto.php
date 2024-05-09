@@ -197,6 +197,10 @@ include("head.php");?>
             event.preventDefault();
             alert("Por favor, adjunta el comprobante correspondiente a la autorización.");
         }
+        if(comprobanteInput.files.length > 0 && pdfInput.files.length > 0){
+          event.preventDefault();
+          alert("Por favor selecione si es XML o PDF");
+        }
     });
 
     xmlInput.addEventListener("change", function() {
@@ -268,7 +272,7 @@ function limpiarCampos() {
     document.getElementById("comprobante").disabled = false;
 
     // Deshabilitar campos de PDF
-    document.getElementById("pdf").disabled = true;
+    document.getElementById("pdf").disabled = false;
 }
 
 
