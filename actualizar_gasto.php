@@ -14,7 +14,7 @@ if ($con->connect_error) {
 }
 
 // Obtener los datos del formulario de edición
-$id = $_POST['id'];
+$id = $_POST['id_finanza'];
 $proveedor = $_POST['proveedor'];
 $rfc = $_POST['rfc'];
 $fecha = $_POST['fecha'];

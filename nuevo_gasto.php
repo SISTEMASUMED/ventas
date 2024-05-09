@@ -37,7 +37,7 @@ $row_check = $result_check->fetch_assoc();
 
 if ($row_check['count'] > 0) {
   // Mostrar alerta si ya existe un registro con el mismo UUID
-  echo "<script>alert('Ya existe una factura con el mismo UUID. No se puede facturar dos veces la misma factura.'); window.location.href = 'gastos.php';</script>";
+  echo "<script>alert('El gasto ya existe favor de verificar'); window.location.href = 'gastos.php';</script>";
 } else {
   // Insertar datos en la base de datos si no existe un registro con el mismo UUID
                                                           //Datos de la tabla sql head
@@ -47,10 +47,10 @@ if ($row_check['count'] > 0) {
 
   if ($con->query($sql) === TRUE) {
     // Mostrar alerta de éxito
-    echo "<script>alert('Datos guardados exitosamente.'); window.location.href = 'gastos.php';</script>";
+    echo "<script>alert('El gasto ha sido guardado exitosamente.'); window.location.href = 'gastos.php';</script>";
   } else {
     // Mostrar alerta de error
-    echo "<script>alert('Error al guardar los datos: " . $con->error . "');</script>";
+    echo "<script>alert('Error al guardar el gasto" . $con->error . "');</script>";
   }
 }
 
