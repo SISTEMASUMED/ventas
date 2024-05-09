@@ -96,19 +96,19 @@ if ($result->num_rows > 0) {
 
             if ($rw_usuario['is_admin'] == 1) {
                 // Admin todas las opciones
-                echo "<a href='descargar_excel_gasto.php?id=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
-                echo "<a href='detalle_gasto.php?id=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
-                echo "<a href='editar_gasto.php?id=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
-                echo "<a href='eliminar_gasto.php?id=" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
+                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+                echo "<a href='eliminar_gasto.php?id_finanza  =" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
             } elseif ($rw_usuario['is_admin'] == 2) {
                 // Ventas editar y ver
-                echo "<a href='detalle_gasto.php?id=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
-                echo "<a href='editar_gasto.php?id=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
-                echo "<a href='eliminar_gasto.php?id=" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+                echo "<a href='eliminar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
             } elseif ($rw_usuario['is_admin'] == 5) {
                 // Finanzas ver y descargar
-                echo "<a href='descargar_excel_gasto.php?id=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
-                echo "<a href='detalle_gasto.php?id=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
             }
 
         echo "</td>";
