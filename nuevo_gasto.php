@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
       header("location: login.php");
+      
   exit;
       }
 
@@ -14,7 +15,6 @@ if ($con->connect_error) {
 }
 
 // Obtener datos del formulario
-// $fecha = $_POST['fecha'];
 $rfc = $_POST['rfc'];
 $proveedor = $_POST['proveedor'];
 $uuid = $_POST['uuid'];
@@ -28,6 +28,7 @@ $fechaFormateada = $_POST['fechaFormateada'];
 $status = $_POST['status']; 
 $xml = $_POST['xml'];
 $pdf = $_POST['pdf'];
+$id_vendedor = $_SESSION['user_id'];
 
 
 // Verificar si ya existe un registro con el mismo UUID
@@ -41,8 +42,8 @@ if ($row_check['count'] > 0) {
 } else {
   // Insertar datos en la base de datos si no existe un registro con el mismo UUID
                                                           //Datos de la tabla sql head
-  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status, xml_path, pdf_path)
-  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1, '$xml', '$pdf ')";
+  $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status, xml_path, pdf_path, id_vendedor)
+  VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1, '$xml', '$pdf', '$id_vendedor')";
                                                           //Variables del POST 
 
   if ($con->query($sql) === TRUE) {

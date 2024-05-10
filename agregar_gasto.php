@@ -1,7 +1,8 @@
 <?php
-	session_start();
+session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: login.php");
+        $id_vendedor = $_SESSION['user_id'];
 		exit;
         }
         $active_facturas="";
@@ -11,7 +12,6 @@
         $active_clientes="";
         $active_usuarios="";	
         $title="SUMED";
-        $usuario = $_SESSION['user_id'];
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -48,7 +48,7 @@ include("head.php");?>
               <input class="form-control input-sm" type="file" accept=".xml" id="xml" name="xml" required class="form-control">
             </div>
             <div class="col-md-1">
-
+              <input type="hidden" name="id_vendedor" value="<?php echo $id_vendedor; ?>">
             </div>
             <div class="col-md-1">
 
