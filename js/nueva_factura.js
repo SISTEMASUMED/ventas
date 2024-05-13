@@ -148,3 +148,27 @@
 			});
 		  event.preventDefault();
 		})
+
+			
+
+		$( "#guardar_envio" ).submit(function( event ) {
+			$('#guardar_contacto').attr("disabled", true);
+			
+		   var parametros = $(this).serialize();
+		   $.ajax({
+				  type: "POST",
+				  url: "ajax/nuevo_contacto.php",
+				  data: parametros,
+				   beforeSend: function(objeto){
+					  $("#resultados_ajax_contacto").html("Mensaje: Cargando...");
+					},
+				  success: function(datos){ 
+					console.log('estamos aki');
+					load(1);
+				  $("#resultados_ajax_contacto").html(datos);
+				  $('#guardar_contacto').attr("disabled", false);
+				  
+				}
+		  });
+		event.preventDefault();
+	  })

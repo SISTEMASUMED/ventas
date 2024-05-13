@@ -36,6 +36,7 @@
         success: function(datos){
 		$("#resultados").html(datos);
 		load(1);
+			
 		}
 			});
 		}
@@ -50,4 +51,17 @@
 			VentanaCentrada('./pdf/documentos/ver_factura2.php?id_factura='+id_factura+'&numero_factura='+numero_factura);
 		}
 		
-	
+     
+
+	function notificaciones(tipo){
+		// Push.create('SUMED', {
+		// 	body: tipo,
+		// 	icon: 'icon.png',
+		// 	timeout: 8000,               // Timeout before notification closes automatically.
+		// 	vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
+		// 	onClick: function() {
+		// 		// Callback for when the notification is clicked. 
+		// 		console.log(this);
+		// 	}  
+		// });
+	}

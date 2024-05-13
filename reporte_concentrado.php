@@ -60,39 +60,29 @@
                         <input type="date" class="form-control" id="fecha_fin" >
                     </div>
                 </div>
-				<!--<div class="form-group row">
-				<label for="q" class="col-md-2 control-label">Hospital/Cliente</label>
-				<div class="col-md-2">
-				<select class="form-control" id="cliente">
-							<option selected="selected" value="">Cliente</option>
-						<?php $sql_clientes="SELECT * FROM clientes"; $query= mysqli_query($con, $sql_clientes);
-						while($row_cli=mysqli_fetch_array($query))
-								{
-								?>
-								<option value='<?php echo $clave=$row_cli['id_cliente'];?>'><?php echo $row_cli['nombre_cliente'];;?></option>
-								<?php
-								}
-								?>		
-								</select>
-				</div>
-				</div>-->
+				
                   
 				<div class="form-group row">
 				  <label for="nombre" class="col-md-2 control-label">Cliente</label>
 				  <div class="col-md-2">
 					  <input type="text" class="form-control input-sm" name="nombre" id="nombre_cliente" placeholder="Selecciona un cliente" required>
-					  <input id="id_cliente" type='hidden'>	
+					  <input type='hidden' id="id_cliente" >	
 				  </div>	
+				</div>
+
+				<!--BOTONES DE BUSCAR Y DESCARGA-->
 
 				  <div class="form-group row">
-                    <div class="col-md-1" style="">
+                    <div class="col-md-1" >
                         <button type="button" class="btn btn-lg btn-default" onclick='load();'>
                             <span class="glyphicon glyphicon-search" ></span> Buscar</button>
                         
                     </div>
+				
+					
                 
                     <div class="col-md-2" >
-                        <button type="button" class="btn btn-lg btn-success" onclick='load_excel();'>
+                        <button type="button" class="btn btn-lg btn-success" onclick='descargar_excel();'>
                             <span class="glyphicon glyphicon-download" ></span> Descargar Excel</button>
                         <span id="loader"></span>
                     </div>
@@ -120,7 +110,7 @@
 </html>
 <script>
 	$(function() {
-						$("#nombre_cliente").autocomplete({
+			$("#nombre_cliente").autocomplete({
 							source: "./ajax/autocomplete/clientes.php",
 							minLength: 2,
 							select: function(event, ui) {
@@ -132,7 +122,7 @@
 						 
 						
 					});
-					
+								
 	$("#nombre_cliente").on( "keydown", function( event ) {
 						if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
 						{
@@ -167,13 +157,7 @@ $( "#editar_estado" ).submit(function( event ) {
 			  event.preventDefault();
 			})
 
-function obtener_datos(id){
-			console.log(id);
-			 var clave = $("#estado"+id).val();
-			console.log(clave); 
-			 $("#mod_id").val(id);
-			 $("#mod_estado").val(clave);
-			
-		 }
+// 
+
 		 
 	</script>

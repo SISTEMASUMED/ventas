@@ -68,14 +68,15 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 
 	
     <table cellspacing="0" style="width: 100%; text-align: left; font-size: 11pt;">
-        <tr>
-           <td style="width:50%;" class='midnight-blue'>FACTURAR A</td>
-        </tr>
+    <tr style="width: 100%;"> 
+	<td style="display:inline-block; background-color: #084599; width:200%; color:#ffffff;">Facturar a:</td>
+
+</tr>
 		<tr>
            <td style="width:50%;" >
 			<?php 
 				$sql_cliente=mysqli_query($con,"select * from clientes where id_cliente='$id_cliente'");
-				echo "<br><span> Nombre:</span>";
+				echo "<br><span> Nombre: </span>";
 				$rw_cliente=mysqli_fetch_array($sql_cliente);
 				echo $rw_cliente['nombre_cliente'];
 				echo "<br><span>  RFC: </span>";
@@ -85,12 +86,37 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 				echo "<br> <span> Teléfono:</span> ";
 				echo $rw_cliente['telefono'];
 				$email=$rw_cliente['emailpred'];
-				$email=str_replace('"','',$email);
+				//$email=str_replace('"','',$email);
 				echo "<br><span>  Email: </span>";
 				echo $email;
 				
 			?>	
+		   </td >
+		   <td style="margin-left:50%;">
+			<?php
+			$sql_contacto=mysqli_query($con, "SELECT * FROM contactos WHERE id_factura='".$numero_factura."' AND id_vendedor='".$id_vendedor."' ");
+			if($rw_contacto = mysqli_fetch_array($sql_contacto)){
+			echo "<br><span> Persona de contacto: </span>";
+			echo $rw_contacto['nombre_contacto'];
+			echo "<br><span> Calle: </span>";
+			echo $rw_contacto['calle_contacto'];
+			echo "<br><span> Número interior: </span>";
+			echo $rw_contacto['interior_contacto'];
+			echo "<br><span>Número exterior: </span>";
+			echo $rw_contacto['exterior_contacto'];
+			echo "<br><span> Colonia: </span>";
+			echo $rw_contacto['colonia_contacto'];
+			echo "<br><span> C.P.: </span>";
+			echo $rw_contacto['postal_contacto'];
+			echo "<br><span> Teléfono de contacto: </span>";
+			echo $rw_contacto['telefono_contacto'];
+			}else{
+				echo"";
+			}
+			
+			?>
 		   </td>
+		   
         </tr>
     </table>
        <br>
@@ -277,6 +303,23 @@ while ($row = mysqli_fetch_array($sql)) {
 	
 	
 	<br>
+	<table cellspacing="0" style="width: 70%; text-align: left; font-size: 11pt;">
+    <tr style="width: 100%;"> 
+	
+</tr>
+		<tr>
+           <td style="width:40%; text-align:center;" >
+			<?php 
+
+				echo "<img src='".substr($img_url,18)."' style='display:inline;width:25%; heigh:auto; margin-left:40%;''>";
+				echo "<span style='display:inline; margin-left:50%; margin-top:20%; '>___________________________________</span>";
+				echo "<br><span  style='margin-left:50%;'> Firma del Médico </span>";
+				
+				
+			?>	
+		   </td >
+		   </tr>
+    </table>
 	<footer>	
 <?php 
 /*if ($filas<5){

@@ -29,14 +29,16 @@ $usuario = $_SESSION['user_id'];
     <div class="container-fluid">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> <?php echo $usuario;?>Nueva Remisión</h4>
-			
+			<h4><i class='glyphicon glyphicon-edit'></i>  Nueva Remisión</h4>
+			<!-- <?php echo "nombre".$_SESSION['nombre_contacto'];?> -->
 		</div>
 	<div class="panel-body">
 		<?php 
 			include("modal/buscar_productos.php");
 			include("modal/registro_clientes.php");
 			include("modal/registro_productos.php");
+			include("modal/registro_contacto.php");
+			include("modal/registro_firma.php");
 		?>
 		<form onkeydown="return event.key != 'Enter';"  class="form-horizontal"  id="datos_factura">
 				<div class="form-group row">
@@ -169,18 +171,25 @@ $usuario = $_SESSION['user_id'];
 
 						  if ($rw_usuario['is_admin']!=3){
 							echo "<br>
+							
 						<button type='button' class='btn btn-default botones_cel' data-toggle='modal' data-target='#nuevoProducto'>
-						 <span class='glyphicon glyphicon-plus'></span> Nuevo Producto
+						 <span class='glyphicon glyphicon-plus'></span> Nuevo Producto</button>
 						</button>
 						<button type='button' class='btn btn-default botones_cel' data-toggle='modal' data-target='#nuevoCliente'>
-						 <span class='glyphicon glyphicon-user'></span> Nuevo cliente
+						 <span class='glyphicon glyphicon-user'></span> Nuevo cliente</button>
 						</button>";}
 						?>
+						<button type="button" class="btn btn-default botones_cel" data-toggle="modal" data-target="#guardarFirma">
+						 <span class="glyphicon glyphicon-send"></span> Firmar Remisión</button>
+
+						<button type="button" class="btn btn-default botones_cel" data-toggle="modal" data-target="#guardarContacto">
+						 <span class="glyphicon glyphicon-send"></span> Datos de Envío</button>
+
 						<button type="button" class="btn btn-default botones_cel" data-toggle="modal" data-target="#myModal">
-						 <span class="glyphicon glyphicon-search"></span> Agregar productos
-						 <br>
+						 <span class="glyphicon glyphicon-search"></span> Agregar productos</button>
+						
 						<button type="submit" class="btn btn-default botones_cel" onclick="push()">
-						  <span class="glyphicon glyphicon-print"></span> Guardar e Imprimir
+						  <span class="glyphicon glyphicon-print"></span> Guardar e Imprimir</button>
 						</button>
 					</div>	
 				</div>
@@ -201,6 +210,7 @@ $usuario = $_SESSION['user_id'];
 	?>
 	<script type="text/javascript" src="js/VentanaCentrada.js"></script>
 	<script type="text/javascript" src="js/nueva_factura.js"></script>
+	<script type="text/javascript" src="js/firma.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>

@@ -91,6 +91,41 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			
 		   </td>
         </tr>
+		<tr>
+			<td style="width:50%; margin-left:50%" >
+				<?php
+				$nombre_contacto=$_SESSION['nombre_contacto'];
+				$calle_contacto= $_SESSION['calle_contacto'];
+				$numint_contacto=$_SESSION['numint_contacto'];
+				$numext=$_SESSION['numext_contacto'];
+				$colonia_contacto=$_SESSION['colonia_contacto'];
+				$telefono_contacto=$_SESSION['telefono_contacto'];
+				$postal=$_SESSION['postal_contacto'];
+
+
+					echo "<br><span>Contacto</span>";
+					echo $nombre_contacto;
+					echo "<br><span>Calle:</span>";
+					echo $calle_contacto;
+					echo "<br><span>Número Interior:</span>";
+					echo $numint_contacto;
+					echo "<br><span>Número exterior:</span>";
+					echo $numext;
+					echo "<br><span>Colonia:</span>";
+					echo $colonia_contacto;
+					echo "<br><span>Teléfono:</span>";
+					echo $telefono_contacto;
+					echo "<br><span>Código Postal:</span>";
+					echo $postal;
+
+					
+					
+					
+
+				?>
+
+			</td>
+		</tr>
         
    
     </table>
@@ -152,6 +187,7 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 			<th style="width: 10%;text-align:center" class='midnight-blue'>REFERENCIA</th>
 			<th style="width: 10%;text-align:center" class='midnight-blue'>ALMACEN</th>
 			<th style="width: 10%;text-align:center" class='midnight-blue'>LOTE</th>
+			<th style="width: 10%;text-align:center" class='midnight-blue'>CADUCIDAD</th>
             <th style="width: 20%"text-align:center  class='midnight-blue'>DESCRIPCION	</th>
 			<th style="width: 10%;text-align:center" class='midnight-blue'>CANT.</th>
             <th style="width: 20%;text-align:center" class='midnight-blue'>PRECIO UNIT.</th>
@@ -212,9 +248,17 @@ $id_tmp = $row["id_tmp"];
 
 	<?php
 
-   
-	//Insert en la tabla detalle_cotizacion
+   //insertar datos de contacto
 
+	
+
+   $insert_contacto= mysqli_query($con,"INSERT INTO contactos VALUES (NULL, '$id_vendedor','$numero_factura','$nombre_contacto', '$calle_contacto', '$colonia_contacto', '$numint_contacto','$numext','$postal','$telefono_contacto')");
+
+
+
+
+   //Insert en la tabla detalle_cotizacion
+  
 	$insert_detail = mysqli_query($con, "INSERT INTO detalle_factura VALUES (NULL,'$numero_factura','$id_producto','$codigo_producto','$referencia','$lote','$caducidad','$almacen','$cantidad','$precio_venta_r','$id_vendedor')");
 	$nums++;
 }
@@ -277,6 +321,15 @@ $date=date("Y-m-d H:i:s");
 $insert = mysqli_query($con, "INSERT INTO facturas VALUES (NULL,'$numero_factura','$date','$id_cliente','$id_vendedor','$total_factura','1','$compra','$cotizacion','$doctor','$paciente','$material','$pago','$d_factura','$observaciones','1',0,0)");
 	
 $delete=mysqli_query($con,"DELETE FROM tmp WHERE session_id='".$session_id."'");
+
+//borra las variables de sesión
+
+$_SESSION['nombre_contacto']="";
+$_SESSION['calle_contacto']="";
+$_SESSION['numext_contacto']="";
+$_SESSION['colonia_contacto']="";
+$_SESSION['telefono_contacto']="";
+$_SESSION['postal_contacto']="";
 ?>
 
 <script>

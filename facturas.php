@@ -91,6 +91,17 @@
 </html>
 <script>
 
+// 	Push.create('Hi there!', {
+//     body: 'This is a notification.',
+//     icon: 'icon.png',
+//     timeout: 8000,               // Timeout before notification closes automatically.
+//     vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
+//     onClick: function() {
+//         // Callback for when the notification is clicked. 
+//         console.log(this);
+//     }  
+// });
+
 
 $( "#editar_estado" ).submit(function( event ) {
 			$('#actualizar_estado').attr("disabled", true);

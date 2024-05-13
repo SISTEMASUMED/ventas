@@ -1,14 +1,14 @@
 <?php
 
-include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
+include('./ajax/is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
  $id_factura= $_GET['id_factura'];
  $numero_factura= $_GET['numero_factura'];
  $session_id= session_id();
 	/* Connect To Database*/
-	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+	require_once ("./config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+	require_once ("./config/conexion.php");//Contiene funcion que conecta a la base de datos
 	//Archivo de funciones PHP
-	include("../funciones.php");
+	include("./funciones.php");
 
 
 $sql_borrar=mysqli_query($con,"DELETE FROM tmp WHERE session_id = '".$session_id."'");
@@ -41,5 +41,5 @@ $item=1;
     //  header("Location: ../nueva_factura_cl.php?id_factura=".$id_factura);
 	//  die();
 	 //echo "<script>console.log('".$id_factura." ".$n."')</script>";
-	 include(dirname('__FILE__').'./nueva_factura_cl.php');
+	 include(dirname('__FILE__').'/nueva_factura_cl.php');
 ?>

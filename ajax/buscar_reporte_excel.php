@@ -1,31 +1,32 @@
 <?php
+ header("Content-Type: application/xls; charset=iso-8859-1");
+ header("Content-Disposition: attachment; filename=reporte.xls");
 
-error_reporting(0);
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
 	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
-	
-	
+
+
 
 		$fecha_inicio=date("Y-m-d", strtotime($_GET['fecha_inicio']));
         $fecha_fin=date("Y-m-d", strtotime($_GET['fecha_fin']));
 		$id_cliente=intval($_GET['id_cliente']);
-        
+
 
 		$usuario = $_SESSION['user_id'];
 		// $sql_reporte="SELECT * FROM  materiales_servicio INNER JOIN servicios ON materiales_servicio.numero_servicio=servicios.numero_servicio
-		// INNER JOIN inve01 ON materiales_servicio.id_producto = inve01.id_producto where materiales_servicio.id_vendedor=servicios.id_vendedor 
+		// INNER JOIN inve01 ON materiales_servicio.id_producto = inve01.id_producto where materiales_servicio.id_vendedor=servicios.id_vendedor
 		// AND fecha_servicio >= '$fecha_inicio' AND fecha_servicio < '$fecha_fin'";
-		
+
 		$sql_reporte="SELECT * FROM  detalle_servicio INNER JOIN servicios ON  detalle_servicio.numero_servicio = servicios.numero_servicio
-	 	INNER JOIN claves_servicios ON detalle_servicio.id_claves= claves_servicios.id_claves where detalle_servicio.id_vendedor=servicios.id_vendedor 
+	 	INNER JOIN claves_servicios ON detalle_servicio.id_claves= claves_servicios.id_claves where detalle_servicio.id_vendedor=servicios.id_vendedor
 		AND servicios.id_hospital = $id_cliente AND servicios.fecha_servicio >= '$fecha_inicio' AND servicios.fecha_servicio < '$fecha_fin'";
 
 		echo "<script>console.log('fecha inicio ".$fecha_inicio."');</script>";
 		echo "<script>console.log('fecha fin ".$fecha_fin."');</script>";
 		echo "<script>console.log('cliente ".$id_cliente."');</script>";
-      
+
         $query_servicio=mysqli_query($con,$sql_reporte);
 		//echo "<script>console.log('sql".$sql_reporte."');</script>";
 			?>
@@ -62,7 +63,7 @@ error_reporting(0);
 					$costo=$row['precio'];
 					?>
 
-				
+
 					<tr>
                         <td><?php echo $progresivo; ?></td>
 						<?php $sql_letra="SELECT users.user_id, users.nombre, users.letra FROM users WHERE user_id= $id_vendedor " ;
@@ -70,7 +71,7 @@ error_reporting(0);
 						$row_venta=mysqli_fetch_array($query_venta);
 						?>
 						<td><?php echo $row_venta['letra']."-".$numero_remision;  ?></td>
-						
+
 						<td><?php echo date("d/m/Y", strtotime($fecha_servicio));?></td>
 						<td><?php echo $medico;?></td>
 						<td><?php echo $paciente?></td>
@@ -78,9 +79,9 @@ error_reporting(0);
 						<td><?php echo $cantidad?></td>
 						<td><?php echo substr($descripcion,0,50);?></td>
 						<td><?php echo $clvsi;?></td>
-						
+
 					<td><?php echo "$".number_format($costo,2,".",",");?></td>
-					<?php 
+					<?php
 					$total=$cantidad*$costo;
 					?>
 					<td><?php echo "$".number_format($total,2,".",",") ;?></td>
@@ -89,14 +90,14 @@ error_reporting(0);
 					$progresivo++;
 				}
 				?>
-				
+
 			  </table>
-			  <script>
+			  <!-- <script>
 	var tabla = document.querySelector("#myTable");
 	var dataTable = new DataTable(tabla);
-	</script>
+	</script> -->
 			</div>
 			<?php
-		
-	
+
+
 ?>

@@ -1,6 +1,6 @@
 <?php
 	
-	session_start();
+	//session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: login.php");
 		exit;
@@ -12,17 +12,17 @@
 	$active_usuarios="";	
 	$title="SUMED";
 	
-	/* Connect To Database*/
-	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
-	$session_id= session_id();
-	$id_vendedor=$_SESSION['user_id'];
+	// /* Connect To Database*/
+	// require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+	// require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
+	// $session_id= session_id();
+	// $id_vendedor=$_SESSION['user_id'];
 	
 ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <?php include("head.php");?>
+    <?php include("head.php") ?>
   </head>
   <body>
 	<?php
@@ -30,8 +30,8 @@
 	?>  
     <div class="container-fluid">
 	<div class="panel panel-info">
-		<div class="panel-heading">
-			<h4><i class='glyphicon glyphicon-edit'></i> Editar Remisión</h4>
+		<div class="panel">
+			<h4><i class='glyphicon glyphicon-edit'></i> Nueva Remisión</h4>
 		</div>
 		<div class="panel-body">
 		<?php 
