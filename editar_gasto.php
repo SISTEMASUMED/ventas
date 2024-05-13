@@ -21,18 +21,17 @@
 
 ?>
 
+
 <?php
+    $id = $_GET['id_finanza']; // Obtener ID del gasto de la URL usando $_GET
 
-$id = $_GET['id_finanza']; 
+    // Obtener los detalles del gasto
+    $sql = "SELECT * FROM finanzas WHERE id_finanza = $id";
+    $result = $con->query($sql);
 
-// Obtener los detalles del gasto
-$sql = "SELECT * FROM finanzas WHERE id_finanza = $id";
-$result = $con->query($sql);
-
-if ($result->num_rows > 0) {
-    
-    $row = $result->fetch_assoc();
-    ?>
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+?>
     <!DOCTYPE html>
     <html>
     <head>
@@ -74,6 +73,8 @@ if ($result->num_rows > 0) {
                 <div class="col-md-2">
                     <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="<?php echo $row['fecha']; ?>">
                     <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="<?php echo $fechaFormateada; ?>">
+                    <input type="hidden" name="id_finanza" value="<?php echo $row['id_finanza']; ?>">
+
                 </div>
             </div>
             <div class="form-group row">
