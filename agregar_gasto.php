@@ -39,7 +39,7 @@ include("head.php");?>
     </div>
 
     <div class="panel-body">
-      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post">
+      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post" enctype="multipart/form-data">
         <div class="form-group row">    <!-- primer group -->
           <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente O en caso de tener Autorización subir el Ticket o Comprobante</label></center>
           <br>
@@ -134,7 +134,7 @@ include("head.php");?>
           
           <label for="pdf" class="col-sm-1 control-label">PDF:</label>
             <div class="col-md-3">
-              <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control input-sm">
+              <input type="file" accept="application/pdf" id="pdf" name="pdfFile" class="form-control input-sm">
             </div>
           <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
