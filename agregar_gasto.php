@@ -45,7 +45,7 @@ include("head.php");?>
           <br>
             <label class="col-md-1 control-label" for="xml">XML:</label>
             <div class="col-md-2">
-              <input class="form-control input-sm" type="file" accept=".xml" id="xml" name="xml" required class="form-control">
+              <input class="form-control input-sm" type="file" accept="text/xml" id="xml" name="xmlFile" required class="form-control">
             </div>
             <div class="col-md-1">
               <input type="hidden" name="id_vendedor" value="<?php echo $id_vendedor; ?>">
