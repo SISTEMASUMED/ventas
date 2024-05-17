@@ -5,7 +5,6 @@ session_start();
         $id_vendedor = $_SESSION['user_id'];
 		exit;
         }
-<<<<<<< Updated upstream
         $active_facturas="";
         $active_productos="";
         $active_servicios="";
