@@ -4,6 +4,7 @@
         header("location: login.php");
 		exit;
         }
+<<<<<<< Updated upstream
         $active_facturas="";
         $active_productos="";
         $active_servicios="";
@@ -12,6 +13,15 @@
         $active_usuarios="";	
         $title="SUMED";
         $usuario = $_SESSION['user_id'];
+=======
+	$active_facturas="";
+	$active_productos="";
+	$active_servicios="";
+   $active_finanzas="active";
+	$active_clientes="";
+	$active_usuarios="";	
+	$title="SUMED";
+>>>>>>> Stashed changes
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
