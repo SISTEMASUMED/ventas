@@ -1,7 +1,8 @@
 <?php
-	session_start();
+session_start();
 	if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] != 1) {
         header("location: login.php");
+        $id_vendedor = $_SESSION['user_id'];
 		exit;
         }
 <<<<<<< Updated upstream
@@ -13,15 +14,6 @@
         $active_usuarios="";	
         $title="SUMED";
         $usuario = $_SESSION['user_id'];
-=======
-	$active_facturas="";
-	$active_productos="";
-	$active_servicios="";
-   $active_finanzas="active";
-	$active_clientes="";
-	$active_usuarios="";	
-	$title="SUMED";
->>>>>>> Stashed changes
 	
 	/* Connect To Database*/
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
@@ -49,16 +41,16 @@ include("head.php");?>
     </div>
 
     <div class="panel-body">
-      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post">
+      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post" enctype="multipart/form-data">
         <div class="form-group row">    <!-- primer group -->
           <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente O en caso de tener Autorización subir el Ticket o Comprobante</label></center>
           <br>
             <label class="col-md-1 control-label" for="xml">XML:</label>
             <div class="col-md-2">
-              <input class="form-control input-sm" type="file" accept=".xml" id="xml" name="xml" required class="form-control">
+              <input class="form-control input-sm" type="file" accept="text/xml" id="xml" name="xmlFile" required class="form-control">
             </div>
             <div class="col-md-1">
-
+              <input type="hidden" name="id_vendedor" value="<?php echo $id_vendedor; ?>">
             </div>
             <div class="col-md-1">
 
@@ -87,7 +79,9 @@ include("head.php");?>
             <label for="fecha" class="col-sm-1 control-label">Fecha:</label>
             <div class="col-md-2">
               <input type="text" id="fecha" name="fecha" readonly class="form-control input-sm" value="">
+              <!-- Hidden -->
               <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="<?php echo $fechaFormateada; ?>">
+              <input type="hidden" id="status" name="status" value="">
             </div>
          
         </div>     <!-- segundo group -->
@@ -142,9 +136,9 @@ include("head.php");?>
           
           <label for="pdf" class="col-sm-1 control-label">PDF:</label>
             <div class="col-md-3">
-              <input type="file" accept=".pdf" id="pdf" name="pdf" class="form-control input-sm">
+              <input type="file" accept="application/pdf" id="pdf" name="pdfFile" class="form-control input-sm">
             </div>
-        <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
+          <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
             <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control input-sm">
           </div>
@@ -204,6 +198,10 @@ include("head.php");?>
         if (autorizacionInput.files.length > 0 && comprobanteInput.files.length === 0) {
             event.preventDefault();
             alert("Por favor, adjunta el comprobante correspondiente a la autorización.");
+        }
+        if(comprobanteInput.files.length > 0 && pdfInput.files.length > 0){
+          event.preventDefault();
+          alert("Por favor selecione si es XML o PDF");
         }
     });
 
@@ -276,12 +274,16 @@ function limpiarCampos() {
     document.getElementById("comprobante").disabled = false;
 
     // Deshabilitar campos de PDF
-    document.getElementById("pdf").disabled = true;
+    document.getElementById("pdf").disabled = false;
 }
 
 
 
 </script>
+
+  <?php
+	  include("footer.php");
+	?>
 
 </body>
 </html>
