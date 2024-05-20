@@ -72,7 +72,7 @@
         $sql = "SELECT * FROM finanzas WHERE status=1";
     } else {
         // Usuarios normales ven solo sus propios gastos
-        $sql = "SELECT * FROM finanzas WHERE status=1 AND id_vendedor='$session_id2'";
+        $sql = "SELECT * FROM finanzas AND users WHERE  finanzas status=1 AND finanzas id_vendedor='$session_id2' AND users nombre='$nombre";
     }
     $result = $con->query($sql);
 
@@ -86,6 +86,7 @@
         <th>Folio</th>
         <th>Referencia</th>
         <th>Observación</th>
+        <th>Vendedor</th>
         <th>Subtotal</th>
         <th>IVA</th>
         <th>Total</th>
@@ -103,6 +104,7 @@
             echo "<td>" . $row["folio"] . "</td>";
             echo "<td>" . $row["referencia"] . "</td>";
             echo "<td>" . $row["observacion"] . "</td>";
+            echo "<td>" . $row["nombre"] . "</td>";
             echo "<td>$" . number_format($row["subtotal"], 2, ".", ",") . "</td>";
             echo "<td>$" . number_format($row["iva"], 2, ".", ",") . "</td>";
             echo "<td>$" . number_format($row["total"], 2, ".", ",") . "</td>";
