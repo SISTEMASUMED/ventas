@@ -56,7 +56,7 @@
                 }
                 
                 if ($rj_usuario1['is_admin'] == 1 || $rj_usuario1['is_admin'] == 5) {
-                    echo "<a href='reporte_gastos.php' class='btn btn-info'><span class='glyphicon glyphicon-download'></span> Reporte de Gastos</a>";
+                    echo "<a href='concentrado_gastos.php' class='btn btn-info'><span class='glyphicon glyphicon-download'></span> Reporte de Gastos</a>";
                 }
                 
             ?>
@@ -69,10 +69,16 @@
     // Mostrar gastos basados en el rol del usuario
     if ($rj_usuario1['is_admin'] == 1) {
         // Administradores ven todos los gastos
-        $sql = "SELECT * FROM finanzas WHERE status=1";
+        $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
+                FROM finanzas f 
+                LEFT JOIN users u ON f.id_vendedor = u.user_id 
+                WHERE f.status=1";
     } else {
         // Usuarios normales ven solo sus propios gastos
-        $sql = "SELECT * FROM finanzas AND users WHERE  finanzas status=1 AND finanzas id_vendedor='$session_id2' AND users nombre='$nombre";
+        $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
+                FROM finanzas f 
+                LEFT JOIN users u ON f.id_vendedor = u.user_id 
+                WHERE f.status=1 AND f.id_vendedor='$session_id2'";
     }
     $result = $con->query($sql);
 
@@ -86,7 +92,7 @@
         <th>Folio</th>
         <th>Referencia</th>
         <th>Observación</th>
-        <th>Vendedor</th>
+        <th>Colaborador</th>
         <th>Subtotal</th>
         <th>IVA</th>
         <th>Total</th>
@@ -104,7 +110,7 @@
             echo "<td>" . $row["folio"] . "</td>";
             echo "<td>" . $row["referencia"] . "</td>";
             echo "<td>" . $row["observacion"] . "</td>";
-            echo "<td>" . $row["nombre"] . "</td>";
+            echo "<td>" . $row["nombre_vendedor"] . "</td>";
             echo "<td>$" . number_format($row["subtotal"], 2, ".", ",") . "</td>";
             echo "<td>$" . number_format($row["iva"], 2, ".", ",") . "</td>";
             echo "<td>$" . number_format($row["total"], 2, ".", ",") . "</td>";

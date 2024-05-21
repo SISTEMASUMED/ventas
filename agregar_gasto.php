@@ -60,7 +60,7 @@ include("head.php");?>
 
             <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
             <div class="col-md-2">
-              <input class="form-control input-sm" type="file" accept=".png, .jpg, .jpeg" id="autorizacion" name="autorizacion" class="form-control">
+              <input class="form-control input-sm" type="file" accept="image/*" id="autorizacion" name="autorizacionFile" class="form-control">
             </div>
         </div>     <!-- primer group -->
 
@@ -139,7 +139,7 @@ include("head.php");?>
             </div>
           <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
-            <input type="file" accept=".png, .jpg, .jpeg" id="comprobante" name="comprobante" class="form-control input-sm">
+            <input type="file" accept="image/*" id="comprobante" name="autorizacionFile" class="form-control input-sm">
           </div>
           <label for="observacion" class="col-sm-1 control-label">Observación:</label>
             <div class="col-md-2">
