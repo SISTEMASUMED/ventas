@@ -81,7 +81,7 @@
                 <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
                 <div class="col-md-3">
                     <select id="referencia" name="referencia" class="form-control select-sm" required>
-                        <option value="<?php echo $row['referencia']; ?>" selected disabled>--Selecciona una opción--</option>
+                        <option value="<?php echo $row['referencia']; ?>" selected disabled></option>
                         <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
                         <option value="Pasaje o Transporte">Pasaje o Transporte</option>
                         <option value="Casetas">Casetas</option>
@@ -91,7 +91,7 @@
                         <option value="Cortesia (Doctores o Hospitales)">Cortesía (Doctores o Hospitales)</option>
                         <option value="Estacionamiento">Estacionamiento</option>
                         <option value="Papelería y Artículos">Papelería y Artículos</option>
-                        <option value="Otros" disabled >Otros</option>
+                        <option value="Otros">Otros</option>
                     </select>
                 </div>
                 <label for="folio" class="col-sm-1 control-label">Folio:</label>

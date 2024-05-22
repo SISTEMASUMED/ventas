@@ -65,27 +65,27 @@
         </div>
 
         <div class="card-body">
-        <?php
-            // Mostrar el enlace para descargar el PDF y/o el XML
-            $pdf_path = $row["pdf_path"];
-            $xml_path = $row["xml_path"];
-            $autorizacion_path = $row["autorizacion_path"];
-            $comprobante_path = $row["comprobante_path"];
 
-            if ($pdf_path && $xml_path) {
-                // Si tiene comprobante y autorización, mostrar y descargar ambos archivos
-                echo '<a class="btn btn-success me-2" href="' . $xml_path . '" download>Descargar XML</a>';
-                echo '<a class="btn btn-danger" href="' . $pdf_path . '" download>Descargar PDF</a>';
-            } else {
-                // Si no tiene comprobante y/o autorización, mostrar solo el enlace disponible
-                if ($autorizacion_path && $comprobante_path) {
-                    echo '<a class="btn btn-success me-2" href="' . $autorizacion_path . '" download>Descargar Autorización</a>';
-                    echo '<a class="btn btn-danger" href="' . $comprobante_path . '" download>Descargar Comprobante</a>';
-                }else {
+            <?php
+                // Mostrar el enlace para descargar el PDF y/o el XML
+                $pdf_path = $row["pdf_path"];
+                $xml_path = $row["xml_path"];
+                $autorizacion_path = $row["autorizacion_path"];
+                $comprobante_path = $row["comprobante_path"];
+
+                if ($pdf_path or $xml_path) {
+                    // Si hay PDF y XML, mostrar y descargar ambos archivos
+                    echo '<a class="btn btn-success me-2" href="' . $xml_path . '" download>Descargar XML</a>';
+                    echo '<a class="btn btn-danger" href="' . $pdf_path . '" download>Descargar PDF</a>';
+                } elseif ($autorizacion_path or $comprobante_path) {
+                    // Si hay autorización y comprobante, mostrar y descargar ambos archivos
+                    echo '<a class="btn btn-info me-2" href="' . $autorizacion_path . '" download>Descargar Autorización</a>';
+                    echo '<a class="btn btn-info" href="' . $comprobante_path . '" download>Descargar Comprobante</a>';
+                } else {
+                    // Si no hay ninguno de los anteriores archivos disponibles
                     echo "No hay archivos disponibles para descargar.";
                 }
-            }
-        ?>
+            ?>
 
         </div>
     </div>
