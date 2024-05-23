@@ -45,52 +45,52 @@
             // Obtener los detalles del gasto
             $row = $result->fetch_assoc();
 ?>
-<center>
-    <h1>Detalle de Gasto</h1>
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="panel panel-info info-tab">
+            <div class="panel-heading">
+                <h4><i class="glyphicon glyphicon-eye-open"></i> Detalle Gasto</h4>
+            </div>
+            <div class="card-center text-center"style="width:500px; margin:0 auto;">
+                <h2>Gasto</h2>
+                <div class="card-body card-center">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Fecha:</strong> <?php echo date('d/m/Y', strtotime($row['fecha'])); ?></li>
+                        <li class="list-group-item"><strong>RFC:</strong> <?php echo htmlspecialchars($row['rfc']); ?></li>
+                        <li class="list-group-item"><strong>Proveedor:</strong> <?php echo htmlspecialchars($row['proveedor']); ?></li>
+                        <li class="list-group-item"><strong>UUID:</strong> <?php echo htmlspecialchars($row['uuid']); ?></li>
+                        <li class="list-group-item"><strong>Folio:</strong> <?php echo htmlspecialchars($row['folio']); ?></li>
+                        <li class="list-group-item"><strong>Referencia:</strong> <?php echo htmlspecialchars($row['referencia']); ?></li>
+                        <li class="list-group-item"><strong>Observación:</strong> <?php echo htmlspecialchars($row['observacion']); ?></li>
+                        <li class="list-group-item"><strong>Subtotal: $</strong> <?php echo number_format($row["subtotal"], 2, ".", ","); ?></li>
+                        <li class="list-group-item"><strong>IVA: $</strong> <?php echo number_format($row["iva"], 2, ".", ","); ?></li>
+                        <li class="list-group-item"><strong>Total: $</strong> <?php echo number_format($row["total"], 2, ".", ","); ?></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <?php
+                    // Mostrar el enlace para descargar el PDF y/o el XML
+                    $pdf_path = $row["pdf_path"];
+                    $xml_path = $row["xml_path"];
+                    $autorizacion_path = $row["autorizacion_path"];
+                    $comprobante_path = $row["comprobante_path"];
 
-    <div class="card" style="width: 40rem;">
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Fecha:</strong> <?php echo date('d/m/Y', strtotime($row['fecha'])); ?></li>
-                <li class="list-group-item"><strong>RFC:</strong> <?php echo $row['rfc']; ?></li>
-                <li class="list-group-item"><strong>Proveedor:</strong> <?php echo $row['proveedor']; ?></li>
-                <li class="list-group-item"><strong>UUID:</strong> <?php echo $row['uuid']; ?></li>
-                <li class="list-group-item"><strong>Folio:</strong> <?php echo $row['folio']; ?></li>
-                <li class="list-group-item"><strong>Referencia:</strong> <?php echo $row['referencia']; ?></li>
-                <li class="list-group-item"><strong>Observación:</strong> <?php echo $row['observacion']; ?></li>
-                <li class="list-group-item"><strong>Subtotal: $</strong> <?php echo number_format($row["subtotal"], 2, ".", ","); ?></li>
-                <li class="list-group-item"><strong>IVA: $</strong> <?php echo number_format($row["iva"], 2, ".", ","); ?></li>
-                <li class="list-group-item"><strong>Total: $</strong> <?php echo number_format($row["total"], 2, ".", ","); ?></li>
-            </ul>
-        </div>
-
-        <div class="card-body">
-
-            <?php
-                // Mostrar el enlace para descargar el PDF y/o el XML
-                $pdf_path = $row["pdf_path"];
-                $xml_path = $row["xml_path"];
-                $autorizacion_path = $row["autorizacion_path"];
-                $comprobante_path = $row["comprobante_path"];
-
-                if ($pdf_path or $xml_path) {
-                    // Si hay PDF y XML, mostrar y descargar ambos archivos
-                    echo '<a class="btn btn-success me-2" href="' . $xml_path . '" download>Descargar XML</a>';
-                    echo '<a class="btn btn-danger" href="' . $pdf_path . '" download>Descargar PDF</a>';
-                } elseif ($autorizacion_path or $comprobante_path) {
-                    // Si hay autorización y comprobante, mostrar y descargar ambos archivos
-                    echo '<a class="btn btn-info me-2" href="' . $autorizacion_path . '" download>Descargar Autorización</a>';
-                    echo '<a class="btn btn-info" href="' . $comprobante_path . '" download>Descargar Comprobante</a>';
-                } else {
-                    // Si no hay ninguno de los anteriores archivos disponibles
-                    echo "No hay archivos disponibles para descargar.";
-                }
-            ?>
-
+                    if ($pdf_path || $xml_path) {
+                        // Si hay PDF y XML, mostrar y descargar ambos archivos
+                        echo '<a class="btn btn-success me-2" href="' . htmlspecialchars($xml_path) . '" download>Descargar XML</a>';
+                        echo '<a class="btn btn-danger" href="' . htmlspecialchars($pdf_path) . '" download>Descargar PDF</a>';
+                    } elseif ($autorizacion_path || $comprobante_path) {
+                        // Si hay autorización y comprobante, mostrar y descargar ambos archivos
+                        echo '<a class="btn btn-info me-2" href="' . htmlspecialchars($autorizacion_path) . '" download>Descargar Autorización</a>';
+                        echo '<a class="btn btn-info" href="' . htmlspecialchars($comprobante_path) . '" download>Descargar Comprobante</a>';
+                    } else {
+                        // Si no hay ninguno de los anteriores archivos disponibles
+                        echo "No hay archivos disponibles para descargar.";
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
-</center>
-
 <?php
         } else {
             // Si no se encontraron resultados para el id_finanza proporcionado, muestra un mensaje de error

@@ -31,12 +31,12 @@
     <?php include("navbar.php") ?>
 
     <div class="container">
-        <h2>Buscar Gastos por Vendedor</h2>
+        <h2>Buscar Gastos por Colaborador</h2>
         <form method="post" action="gastosg_excel.php">
             <div class="form-group">
-                <label for="vendedor">Nombre del Vendedor:</label>
+                <label for="vendedor">Nombre del Colaborador:</label>
                 <select class="form-control" id="vendedor" name="vendedor" required>
-                    <option value="">Seleccione un vendedor</option>
+                    <option value="">Seleccione un Colaborador</option>
                     <?php
                         // Generar las opciones del select con los usuarios
                         while ($row = mysqli_fetch_assoc($result)) {

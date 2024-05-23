@@ -22,6 +22,8 @@
 <html lang="es">
 <head>
     <?php include("head.php"); ?>
+    <!-- Asegúrate de tener este meta tag en tu head -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -83,7 +85,7 @@
     $result = $con->query($sql);
 
     if($result->num_rows > 0) {
-        echo "<table class='table table-striped' id='myTable'>
+        echo "<div class='table-responsive'><table class='table table-striped' id='myTable'>
         <tr>
         <th>Fecha</th>
         <th>RFC</th>
@@ -132,7 +134,7 @@
             echo "</td>";
             echo "</tr>";
         }
-        echo "</table>";
+        echo "</table></div>";
     } else {
         echo "No hay gastos.";
     }
