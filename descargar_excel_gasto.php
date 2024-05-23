@@ -15,7 +15,19 @@ include("config/conexion.php");
 if (!isset($_GET['id_finanza']) || !is_numeric($_GET['id_finanza'])) {
     die("ID de gasto no válido.");
 }
-
+if ($rj_usuario1['is_admin'] == 1) {
+    // Administradores ven todos los gastos
+    $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
+            FROM finanzas f 
+            LEFT JOIN users u ON f.id_vendedor = u.user_id 
+            WHERE f.status=1";
+} else {
+    // Usuarios normales ven solo sus propios gastos
+    $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
+            FROM finanzas f 
+            LEFT JOIN users u ON f.id_vendedor = u.user_id 
+            WHERE f.status=1 AND f.id_vendedor='$session_id2'";
+}
 $id_gasto = intval($_GET['id_finanza']);
 
 // Obtener los datos del gasto
@@ -36,6 +48,7 @@ echo    "<tr>
             <th>Folio</th>
             <th>Referencia</th>
             <th>Observación</th>
+            <th>Colaborador</th>
             <th>Subtotal</th>
             <th>IVA</th>
             <th>Total</th>
@@ -50,6 +63,7 @@ echo "<td>" . $rw_gasto["uuid"] . "</td>";
 echo "<td>" . $rw_gasto["folio"] . "</td>";
 echo "<td>" . $rw_gasto["referencia"] . "</td>";
 echo "<td>" . $rw_gasto["observacion"] . "</td>";
+echo "<td>" . $rw_gasto["nombre"] . "</td>";
 echo "<td>$" . number_format($rw_gasto["subtotal"], 2, ".", ",") . "</td>";
 echo "<td>$" . number_format($rw_gasto["iva"], 2, ".", ",") . "</td>";
 echo "<td>$" . number_format($rw_gasto["total"], 2, ".", ",") . "</td>";
