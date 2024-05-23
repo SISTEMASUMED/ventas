@@ -94,6 +94,8 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 		<tr>
 			<td style="width:50%; margin-left:50%" >
 				<?php
+
+			if($_SESSION['nombre_contacto']!=""){
 				$nombre_contacto=$_SESSION['nombre_contacto'];
 				$calle_contacto= $_SESSION['calle_contacto'];
 				$numint_contacto=$_SESSION['numint_contacto'];
@@ -117,7 +119,9 @@ table.page_footer {width: 100%; border: none; background-color: white; padding: 
 					echo $telefono_contacto;
 					echo "<br><span>Código Postal:</span>";
 					echo $postal;
-
+			}else{
+				echo"";
+			}
 					
 					
 					
@@ -251,9 +255,9 @@ $id_tmp = $row["id_tmp"];
    //insertar datos de contacto
 
 	
-
+if(isset($nombre_contacto)){
    $insert_contacto= mysqli_query($con,"INSERT INTO contactos VALUES (NULL, '$id_vendedor','$numero_factura','$nombre_contacto', '$calle_contacto', '$colonia_contacto', '$numint_contacto','$numext','$postal','$telefono_contacto')");
-
+}
 
 
 
@@ -306,7 +310,27 @@ $id_tmp = $row["id_tmp"];
             <td colspan="3" style="color: #084599; font-weight: bold; width: 25%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
             <td style="width: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
+		
     </table>
+	<div style="margin-top:7%;">
+	<?php 
+
+if(isset($img_url) && $img_url!=""){
+		echo "<div style='z-index:1; margin:0 auto; width:20%; height:15%; display: flex; justify-content: center; align-items:center; '>
+		<img src='".substr($img_url,18)."' style='position:absolute; width:15%; heigh:auto; ''>";
+
+		if(isset($doctor)){
+			echo "<span style='position:relative; top:65%; text-decoration:overline;'>&nbsp&nbsp&nbsp".$doctor."&nbsp&nbsp&nbsp</span>
+			</div>";
+		}		
+		
+		echo "";
+}else{
+	echo "";
+}
+		
+	?>	
+	</div>
 	<br>
 <footer>	
 <!--<img src="res/img/footer.png" alt="" style="width: 100%; height: auto; margin-top:3%;" >-->

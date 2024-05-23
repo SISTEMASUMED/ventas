@@ -39,8 +39,12 @@
 	//echo "<script>console.log('work select:".$rw_factura2."');</script>";
 
 	$sql_firma=mysqli_query($con,"SELECT * FROM firmas WHERE  id_vendedor = '".$id_vendedor."' and numero_factura ='".$numero_factura."'");
-	$rw_firma=mysqli_fetch_array($sql_firma);
-	$img_url=$rw_firma['url_firma'];
+	if($rw_firma=mysqli_fetch_array($sql_firma)){
+
+		$img_url=$rw_firma['url_firma'];
+	}
+
+	
 
     // get the HTML
 	include(dirname('__FILE__').'/res/ver_factura_html.php');

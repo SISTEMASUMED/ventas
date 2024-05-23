@@ -307,19 +307,27 @@ while ($row = mysqli_fetch_array($sql)) {
     <tr style="width: 100%;"> 
 	
 </tr>
-		<tr>
-           <td style="width:40%; text-align:center;" >
-			<?php 
-
-				echo "<img src='".substr($img_url,18)."' style='display:inline;width:25%; heigh:auto; margin-left:40%;''>";
-				echo "<span style='display:inline; margin-left:50%; margin-top:20%; '>___________________________________</span>";
-				echo "<br><span  style='margin-left:50%;'> Firma del Médico </span>";
-				
-				
-			?>	
-		   </td >
-		   </tr>
+		
     </table>
+	<div style="margin-top:7%;">
+	<?php 
+
+if(isset($img_url) && $img_url!=""){
+		echo "<div style='z-index:1; margin:0 auto; width:20%; height:15%; display: flex; justify-content: center; align-items:center; '>
+		<img src='".substr($img_url,18)."' style='position:absolute; width:15%; heigh:auto; ''>";
+
+		if(isset($doctor)){
+			echo "<span style='position:relative; top:65%; text-decoration:overline;'>&nbsp&nbsp&nbsp".$doctor."&nbsp&nbsp&nbsp</span>
+			</div>";
+		}		
+		
+		echo "";
+}else{
+	echo "";
+}
+		
+	?>	
+	</div>
 	<footer>	
 <?php 
 /*if ($filas<5){

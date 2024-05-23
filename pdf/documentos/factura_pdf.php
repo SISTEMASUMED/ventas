@@ -10,9 +10,9 @@
 	/* Connect To Database*/
 	include("../../config/db.php");
 	include("../../config/conexion.php");
-
 	//Archivo de funciones PHP
 	include("../../funciones.php");
+	
 	$session_id= session_id();
 	$sql_count=mysqli_query($con,"select * from tmp where session_id='".$session_id."'");
 	$count=mysqli_num_rows($sql_count);
@@ -45,6 +45,14 @@
 	$rw=mysqli_fetch_array($sql);
 	$numero_factura=$rw['last']+1;	
 	$simbolo_moneda=get_row('perfil','moneda', 'id_perfil', 1);
+
+
+	$sql_firma=mysqli_query($con,"SELECT * FROM firmas WHERE  id_vendedor = '".$id_vendedor."' and numero_factura ='".$numero_factura."'");
+	if($rw_firma=mysqli_fetch_array($sql_firma)){
+
+		$img_url=$rw_firma['url_firma'];
+	}
+ 
     // get the HTML
     include(dirname('__FILE__').'/res/factura_html.php');
    ?>

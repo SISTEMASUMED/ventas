@@ -38,6 +38,12 @@
 	$caducidad=$rw_factura2['caducidad'];
 	$cantidad = $rw_factura2['cantidad'];
     $precio_venta = $rw_factura2['precio_venta'];
+
+	$sql_firma=mysqli_query($con,"SELECT * FROM firmas WHERE  id_vendedor = '".$id_vendedor."' and numero_factura ='".$numero_factura."'");
+	if($rw_firma=mysqli_fetch_array($sql_firma)){
+
+		$img_url=$rw_firma['url_firma'];
+	}
  
 	 // get the HTML
 	 include(dirname('__FILE__').'/res/ver_factura_cliente.php');

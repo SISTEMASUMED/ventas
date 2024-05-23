@@ -290,9 +290,32 @@ while ($row = mysqli_fetch_array($sql)) {
 		  <td colspan="3" style="color: #084599; font-weight: bold; width: 25%; text-align: right;">TOTAL <?php echo $simbolo_moneda;?> </td>
 		  <td style="width: 15%; text-align: right;"> <?php echo number_format($total_factura,2);?></td>
         </tr>
+
+	
+
     </table>
 	
-	
+	<div style="margin-top:7%;">
+	<?php 
+
+if(isset($img_url) && $img_url!=""){
+		echo "<div style='z-index:1; margin:0 auto; width:20%; height:15%; display: flex; justify-content: center; align-items:center; '>
+		<img src='".substr($img_url,18)."' style='position:absolute; width:15%; heigh:auto; ''><br><br>";
+
+		if(isset($doctor)){
+			echo "<span style='position:relative; margin-top:20%; text-decoration:overline;'>&nbsp&nbsp&nbsp".$doctor."&nbsp&nbsp&nbsp</span>
+			</div>";
+		}else{
+			echo "";
+		}		
+		
+		
+}else{
+	echo "";
+}
+		
+	?>	
+	</div>
 	
 	
 	<br>
