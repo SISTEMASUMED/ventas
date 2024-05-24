@@ -175,7 +175,7 @@ include("head.php");?>
       document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');
       document.getElementById('folio').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Folio');
       document.getElementById('subtotal').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('SubTotal');
-      document.getElementById('iva').value = xmlDoc.getElementsByTagName('cfdi:Traslado')[0].getAttribute('Importe');
+      document.getElementById('iva').value = xmlDoc.getElementsByTagName('cfdi:Impuestos')[0].getAttribute('TotalImpuestosTrasladados');
       document.getElementById('total').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Total');
     };
     reader.readAsText(file);
