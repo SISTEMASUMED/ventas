@@ -158,27 +158,34 @@ include("head.php");?>
   document.getElementById('xml').addEventListener('change', handleXMLFile);
 
   function handleXMLFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const xmlContent = e.target.result;
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
-      //hay que formatear la fecha para que aparezca de forma correcta al cargar el xml
-      var fecha= xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
-      var fechaFormateada=moment(fecha).format('DD/MM/YYYY');
-      //document.getElementById('fecha').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
-      document.getElementById('fecha').value = fechaFormateada;
-      document.getElementById('fechaFormateada').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
-      document.getElementById('rfc').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Rfc');
-      document.getElementById('proveedor').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Nombre');
-      document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');
-      document.getElementById('folio').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Folio');
-      document.getElementById('subtotal').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('SubTotal');
-      document.getElementById('iva').value = xmlDoc.getElementsByTagName('cfdi:Impuestos')[0].getAttribute('TotalImpuestosTrasladados');
-      document.getElementById('total').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Total');
-    };
-    reader.readAsText(file);
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          const xmlContent = e.target.result;
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+          
+          // Formatear la fecha
+          var fecha = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
+          var fechaFormateada = moment(fecha).format('DD/MM/YYYY');
+          
+          // Asignar los valores extraídos a los campos correspondientes
+          document.getElementById('fecha').value = fechaFormateada;
+          document.getElementById('fechaFormateada').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('FechaTimbrado');
+          document.getElementById('rfc').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Rfc');
+          document.getElementById('proveedor').value = xmlDoc.getElementsByTagName('cfdi:Emisor')[0].getAttribute('Nombre');
+          document.getElementById('uuid').value = xmlDoc.getElementsByTagName('tfd:TimbreFiscalDigital')[0].getAttribute('UUID');
+          document.getElementById('folio').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Folio');
+          var subtotal = parseFloat(xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('SubTotal'));
+          document.getElementById('subtotal').value = subtotal.toFixed(2);
+
+          // Calcular el IVA del 16% basado en el subtotal
+          var iva = subtotal * 0.16;
+          document.getElementById('iva').value = iva.toFixed(2);
+
+          document.getElementById('total').value = xmlDoc.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Total');
+      };
+      reader.readAsText(file);
   }
 
   document.addEventListener("DOMContentLoaded", function() {
@@ -227,6 +234,16 @@ include("head.php");?>
             xmlInput.disabled = true;
             pdfInput.disabled = true;
             referenciaSelect.value = "Otros"; // Selecciona automáticamente "Otros" en el campo de referencia
+            //Seleccione la fecha al momento
+
+            ///           URGENTE
+
+            //PODER LLENAR LOS CAMPOS 
+
+
+            ///
+
+            
         } else {
             comprobanteInput.disabled = true;
             xmlInput.disabled = false;
