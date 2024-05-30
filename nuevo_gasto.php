@@ -40,7 +40,11 @@ if ($row_check['count'] > 0) {
 
     // Función para manejar la carga de archivos
     function upload_file($file, $allowed_types, $upload_directory) {
-        $file_name = $file['name'];
+        if (!isset($file['name']) || empty($file['name'])) {
+            return ['path' => ''];
+        }
+
+        $file_name = uniqid() . '-' . basename($file['name']);
         $file_tmp = $file['tmp_name'];
         $file_type = $file['type'];
 
@@ -57,6 +61,7 @@ if ($row_check['count'] > 0) {
     }
 
     // Manejo de archivo PDF
+    $pdf_path = '';
     if (isset($_FILES['pdfFile'])) {
         $pdf_result = upload_file($_FILES['pdfFile'], ['application/pdf'], "img/pdf/");
         if (isset($pdf_result['error'])) {
@@ -67,6 +72,7 @@ if ($row_check['count'] > 0) {
     }
 
     // Manejo de archivo XML
+    $xml_path = '';
     if (isset($_FILES['xmlFile'])) {
         $xml_result = upload_file($_FILES['xmlFile'], ['text/xml'], "img/xml/");
         if (isset($xml_result['error'])) {
@@ -77,6 +83,7 @@ if ($row_check['count'] > 0) {
     }
 
     // Manejo de archivo de comprobante (imagen)
+    $comprobante_path = '';
     if (isset($_FILES['comprobanteFile'])) {
         $comprobante_result = upload_file($_FILES['comprobanteFile'], ['image/jpeg', 'image/png', 'image/gif'], "img/comprobante/");
         if (isset($comprobante_result['error'])) {
@@ -87,6 +94,7 @@ if ($row_check['count'] > 0) {
     }
 
     // Manejo de archivo de autorización (imagen)
+    $autorizacion_path = '';
     if (isset($_FILES['autorizacionFile'])) {
         $autorizacion_result = upload_file($_FILES['autorizacionFile'], ['image/jpeg', 'image/png', 'image/gif'], "img/autorizacion/");
         if (isset($autorizacion_result['error'])) {
@@ -101,11 +109,6 @@ if ($row_check['count'] > 0) {
         echo "<script>alert('Error al cargar los archivos: " . implode(", ", $errors) . "'); window.location.href = 'gastos.php';</script>";
     } else {
         // Insertar datos en la base de datos si no existe un registro con el mismo UUID
-        $pdf_path = isset($pdf_path) ? $pdf_path : '';
-        $xml_path = isset($xml_path) ? $xml_path : '';
-        $comprobante_path = isset($comprobante_path) ? $comprobante_path : '';
-        $autorizacion_path = isset($autorizacion_path) ? $autorizacion_path : '';
-
         $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status, xml_path, pdf_path, comprobante_path, autorizacion_path, id_vendedor)
                 VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1, '$xml_path', '$pdf_path', '$comprobante_path', '$autorizacion_path', '$id_vendedor')";
 

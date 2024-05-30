@@ -36,7 +36,7 @@ include("head.php");?>
   <div class="panel panel-info">
     <div class="panel-heading">
       <h4>
-        <i class="glyphicon glyphicon-edit"></i> <?php echo $usuario;?>Nuevo Gasto</h4>
+        <i class="glyphicon glyphicon-edit"></i> <!-- <?php echo $usuario;?> --> Nuevo Gasto</h4>
     </div>
 
     <div class="panel-body">
@@ -234,14 +234,11 @@ include("head.php");?>
             xmlInput.disabled = true;
             pdfInput.disabled = true;
             referenciaSelect.value = "Otros"; // Selecciona automáticamente "Otros" en el campo de referencia
-            //Seleccione la fecha al momento
+            const currentDate = new Date().toISOString().split("T")[0];
+            fechaInput.value = currentDate;//Seleccione la fecha al momento
+            // Set UUID to null
+            uuidInput.value = "null";
 
-            ///           URGENTE
-
-            //PODER LLENAR LOS CAMPOS 
-
-
-            ///
 
             
         } else {
