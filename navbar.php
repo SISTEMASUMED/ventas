@@ -44,7 +44,7 @@
                             <li class='nav__item'>
                                 <a href='gastos.php' class='nav__link ".$active_finanzas."'>
                                     <i class='bx bx-credit-card-alt nav__icon'></i>
-                                    <span class='nav__name'>GASTOS Prueba</span>
+                                    <span class='nav__name'>GASTOS</span>
                                 </a>
                             </li>";
                         }
