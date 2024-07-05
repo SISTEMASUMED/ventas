@@ -39,10 +39,12 @@ include("head.php");?>
         <i class="glyphicon glyphicon-edit"></i> <!-- <?php echo $usuario;?> --> Nuevo Gasto</h4>
     </div>
 
+    <!-- -----------------------------------------------------------XML---------------------------------------------------------------------------------------------------- -->
+
     <div class="panel-body">
       <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post" enctype="multipart/form-data">
         <div class="form-group row">    <!-- primer group -->
-          <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente O en caso de tener Autorización subir el Ticket o Comprobante</label></center>
+          <center><label class="subtitulo">Ingresa tu XML para que los datos se llenen automáticamente</label></center>
           <br>
             <label class="col-md-1 control-label" for="xml">XML:</label>
             <div class="col-md-2">
@@ -58,10 +60,10 @@ include("head.php");?>
               
             </div>
 
-            <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
+            <!-- <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
             <div class="col-md-2">
               <input class="form-control input-sm" type="file" accept="image/*" id="autorizacion" name="autorizacionFile" class="form-control">
-            </div>
+            </div> -->
         </div>     <!-- primer group -->
 
         <hr class="style13">
@@ -137,6 +139,133 @@ include("head.php");?>
             <div class="col-md-3">
               <input type="file" accept="application/pdf" id="pdf" name="pdfFile" class="form-control input-sm">
             </div>
+          <!-- <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
+          <div class="col-md-2">
+            <input type="file" accept="image/*" id="comprobante" name="autorizacionFile" class="form-control input-sm">
+          </div> -->
+          <label for="observacion" class="col-sm-1 control-label">Observación:</label>
+            <div class="col-md-2">
+              <textarea id="observacion" name="observacion" required class="form-control textarea-sm"></textarea>
+            </div>
+        </div>  <!-- quinto group -->
+
+        <button type="submit" style="margin-left:30%; margin-top:2%;" class="btn  btn-info">Agregar Gasto</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- -----------------------------------------------------------XML---------------------------------------------------------------------------------------------------- -->
+
+
+<!-- -----------------------------------------------------------Autorizacion---------------------------------------------------------------------------------------------------- -->
+
+<div class="container-fluid">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4>
+        <i class="glyphicon glyphicon-edit"></i> <!-- <?php echo $usuario;?> --> Nuevo Gasto</h4>
+    </div>
+
+    <div class="panel-body">
+      <form id="facturacionForm" class="form-horizontal" action="nuevo_gasto.php" method="post" enctype="multipart/form-data">
+        <div class="form-group row">    <!-- primer group -->
+          <center><label class="subtitulo">Ingresa tu Autorización y subir el Ticket o Comprobante</label></center>
+          <br>
+            <!-- <label class="col-md-1 control-label" for="xml">XML:</label>
+            <div class="col-md-2">
+              <input class="form-control input-sm" type="file" accept="text/xml" id="xml" name="xmlFile" required class="form-control">
+            </div> -->
+            <div class="col-md-1">
+              <input type="hidden" name="id_vendedor" value="<?php echo $id_vendedor; ?>">
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-1">
+              
+            </div>
+
+            <label class="col-md-1 control-label" for="autorizacion">Autorización:</label>
+            <div class="col-md-2">
+              <input class="form-control input-sm" type="file" accept="image/*" id="autorizacion" name="autorizacionFile" class="form-control">
+            </div>
+        </div>     <!-- primer group -->
+
+        <hr class="style13">
+
+        <div class="form-group row"> <!-- segundo group -->
+          <!-- <label for="proveedor" class="col-sm-1 control-label">Nombre:</label>
+            <div class="col-md-3">
+              <input type="text" id="proveedor" name="proveedor" class="form-control input-sm">
+            </div> -->
+            <!-- <label for="rfc" class="col-sm-1 control-label">RFC:</label>
+            <div class="col-md-2">
+              <input type="text" id="rfc" name="rfc" readonly class="form-control input-sm">
+            </div> -->
+            <label for="text" class="col-sm-1 control-label">Fecha:</label>
+            <div class="col-md-2">
+              <input type="fecha" id="fecha" name="fecha" class="form-control input-sm" value="">
+              <!-- Hidden -->
+              <input type="hidden" id="fechaFormateada" name="fechaFormateada" value="<?php echo $fechaFormateada; ?>">
+              <input type="hidden" id="status" name="status" value="">
+            </div>
+         
+        </div>     <!-- segundo group -->
+
+        <div class="form-group row"> <!-- tercer group -->
+
+        <label for="referencia" class="col-sm-1 control-label">Referencia:</label>
+          <div class="col-md-3">
+            <select id="referencia" name="referencia" class="form-control select-sm">
+              <option value="" selected disabled>--Selecciona una opción--</option>
+              <option value="Viaticos Alimenticios">Viáticos Alimenticios</option>
+              <option value="Pasaje o Transporte">Pasaje o Transporte</option>
+              <option value="Casetas">Casetas</option>
+              <option value="Combustible">Combustible</option>
+              <option value="Hospedaje">Hospedaje</option>
+              <option value="Mensajería">Mensajería</option>
+              <option value="Cortesia (Doctores o Hospitales)">Cortesía (Doctores o Hospitales)</option>
+              <option value="Estacionamiento">Estacionamiento</option>
+              <option value="Papelería y Artículos">Papelería y Artículos</option>
+              <option value="Otros">Otros</option>
+            </select required>
+          </div>
+          <!-- <label for="folio" class="col-sm-1 control-label">Folio:</label>
+            <div class="col-md-2">
+              <input type="text" id="folio" name="folio" readonly class="form-control input-sm">
+            </div>
+          
+            <label for="uuid" class="col-sm-1 control-label">UUID:</label>
+            <div class="col-md-2">
+              <input type="text" id="uuid" name="uuid" readonly class="form-control input-sm">
+            </div> -->
+        </div>  <!-- tercer group -->
+
+        <div class="form-group row">    <!-- cuarto group -->
+         
+          <!-- <label for="subtotal" class="col-sm-1 control-label">Subtotal: $</label>
+            <div class="col-md-3">
+              <input type="text" id="subtotal" name="subtotal" class="form-control input-sm">
+            </div>
+          <label for="iva" class="col-sm-1 control-label">IVA: $</label>
+            <div class="col-md-2">
+              <input type="text" id="iva" name="iva" class="form-control input-sm">
+            </div> -->
+          <label for="total" class="col-sm-1 control-label">Total: $</label>
+            <div class="col-md-2">
+              <input type="text" id="total" name="total" class="form-control input-sm">
+            </div>
+
+        </div>  <!-- cuarto group -->
+
+        <div class="form-group row">   <!-- quinto group -->
+          
+          <!-- <label for="pdf" class="col-sm-1 control-label">PDF:</label>
+            <div class="col-md-3">
+              <input type="file" accept="application/pdf" id="pdf" name="pdfFile" class="form-control input-sm">
+            </div> -->
           <label for="comprobante" class="col-sm-1 control-label">Comprobante:</label>
           <div class="col-md-2">
             <input type="file" accept="image/*" id="comprobante" name="autorizacionFile" class="form-control input-sm">
@@ -153,6 +282,8 @@ include("head.php");?>
     </div>
   </div>
 </div>
+
+<!-- -----------------------------------------------------------Autorizacion---------------------------------------------------------------------------------------------------- -->
 
 <script>
   document.getElementById('xml').addEventListener('change', handleXMLFile);
