@@ -22,7 +22,6 @@
 <html lang="es">
 <head>
     <?php include("head.php"); ?>
-    <!-- Asegúrate de tener este meta tag en tu head -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -44,10 +43,8 @@
                 // Verificar si el usuario es administrador
                 if ($rj_usuario1['is_admin'] == 2) {
                     // El usuario es administrador
-                    // echo "El usuario con ID $id_vendedor";
                 } else {
                     // El usuario no es administrador
-                    // echo "El usuario con ID $id_vendedor";
                 }
             ?>
         
@@ -68,15 +65,13 @@
     </div>
 
     <?php
-    // Mostrar gastos basados en el rol del usuario
+    // Consulta para mostrar todos los gastos
     if ($rj_usuario1['is_admin'] == 1) {
-        // Administradores ven todos los gastos
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
                 FROM finanzas f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
                 WHERE f.status=1";
     } else {
-        // Usuarios normales ven solo sus propios gastos
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
                 FROM finanzas f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
@@ -85,6 +80,7 @@
     $result = $con->query($sql);
 
     if($result->num_rows > 0) {
+        // Primera tabla: todos los gastos
         echo "<div class='table-responsive'><table class='table table-striped' id='myTable'>
         <tr>
         <th>Fecha</th>
@@ -135,6 +131,36 @@
             echo "</tr>";
         }
         echo "</table></div>";
+
+        // Segunda tabla: solo campos específicos
+        echo "<h2>Resumen de Gastos</h2>";
+        echo "<div class='table-responsive'><table class='table table-striped' id='myTableResumen'>
+        <tr>
+        <th>Fecha</th>
+        <th>Colaborador/Colaboradora</th>
+        <th>Referencia</th>
+        <th>Subtotal</th>
+        <th>IVA</th>
+        <th>Total</th>
+        <th>Observaciones</th>
+        </tr>";
+
+        // Iterar nuevamente para la segunda tabla
+        $result->data_seek(0); // Reiniciar el puntero de resultados
+        while($row = $result->fetch_assoc()) {
+            $fecha = date_create($row["fecha"]);
+
+            echo "<tr>";
+            echo "<td>" . date_format($fecha, "d/m/Y") . "</td>";
+            echo "<td>" . $row["nombre_vendedor"] . "</td>";
+            echo "<td>" . $row["referencia"] . "</td>";
+            echo "<td>$" . number_format($row["subtotal"], 2, ".", ",") . "</td>";
+            echo "<td>$" . number_format($row["iva"], 2, ".", ",") . "</td>";
+            echo "<td>$" . number_format($row["total"], 2, ".", ",") . "</td>";
+            echo "<td>" . $row["observacion"] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table></div>";
     } else {
         echo "No hay gastos.";
     }
@@ -143,6 +169,9 @@
     <script>
         var tabla = document.querySelector("#myTable");
         var dataTable = new DataTable(tabla);
+
+        var tablaResumen = document.querySelector("#myTableResumen");
+        var dataTableResumen = new DataTable(tablaResumen);
     </script>
 
     <?php include("footer.php"); ?>

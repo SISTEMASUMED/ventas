@@ -5,25 +5,25 @@ if (!isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] !=
     exit;
 }
 
-require_once("config/db.php"); // Contiene las variables de configuración para conectar a la base de datos
-require_once("config/conexion.php"); // Contiene función que conecta a la base de datos
+require_once("config/db.php");
+require_once("config/conexion.php");
 
 if ($con->connect_error) {
     die("Error de conexión a la base de datos: " . $con->connect_error);
 }
 
-// Obtener datos del formulario
-$rfc = $_POST['rfc'];
-$proveedor = $_POST['proveedor'];
-$uuid = $_POST['uuid'];
-$folio = $_POST['folio'];
-$referencia = $_POST['referencia'];
-$observacion = $_POST['observacion'];
-$subtotal = $_POST['subtotal'];
-$iva = $_POST['iva'];
-$total = $_POST['total'];
-$fechaFormateada = $_POST['fechaFormateada'];
-$status = $_POST['status'];
+// Obtener datos del formulario y sanitizarlos
+$rfc = $con->real_escape_string($_POST['rfc']);
+$proveedor = $con->real_escape_string($_POST['proveedor']);
+$uuid = $con->real_escape_string($_POST['uuid']);
+$folio = $con->real_escape_string($_POST['folio']);
+$referencia = $con->real_escape_string($_POST['referencia']);
+$observacion = $con->real_escape_string($_POST['observacion']);
+$subtotal = $con->real_escape_string($_POST['subtotal']);
+$iva = $con->real_escape_string($_POST['iva']);
+$total = $con->real_escape_string($_POST['total']);
+$fechaFormateada = $con->real_escape_string($_POST['fechaFormateada']);
+$status = 1; // Asumiendo que el status inicial es 1
 $id_vendedor = $_SESSION['user_id'];
 
 // Verificar si ya existe un registro con el mismo UUID
@@ -32,13 +32,11 @@ $result_check = $con->query($sql_check);
 $row_check = $result_check->fetch_assoc();
 
 if ($row_check['count'] > 0) {
-    // Mostrar alerta si ya existe un registro con el mismo UUID
-    echo "<script>alert('El gasto ya existe favor de verificar'); window.location.href = 'gastos.php';</script>";
+    echo "<script>alert('El gasto ya existe, favor de verificar'); window.location.href = 'gastos.php';</script>";
 } else {
-    // Manejo de carga de archivos PDF, XML, comprobante y autorización
+    // Manejo de carga de archivos
     $errors = [];
 
-    // Función para manejar la carga de archivos
     function upload_file($file, $allowed_types, $upload_directory) {
         if (!isset($file['name']) || empty($file['name'])) {
             return ['path' => ''];
@@ -46,7 +44,7 @@ if ($row_check['count'] > 0) {
 
         $file_name = uniqid() . '-' . basename($file['name']);
         $file_tmp = $file['tmp_name'];
-        $file_type = $file['type'];
+        $file_type = mime_content_type($file_tmp);
 
         if (!in_array($file_type, $allowed_types)) {
             return ['error' => "El archivo debe ser de tipo: " . implode(", ", $allowed_types)];
@@ -60,7 +58,7 @@ if ($row_check['count'] > 0) {
         }
     }
 
-    // Manejo de archivo PDF
+    // Manejo de archivos
     $pdf_path = '';
     if (isset($_FILES['pdfFile'])) {
         $pdf_result = upload_file($_FILES['pdfFile'], ['application/pdf'], "img/pdf/");
@@ -71,10 +69,9 @@ if ($row_check['count'] > 0) {
         }
     }
 
-    // Manejo de archivo XML
     $xml_path = '';
     if (isset($_FILES['xmlFile'])) {
-        $xml_result = upload_file($_FILES['xmlFile'], ['text/xml'], "img/xml/");
+        $xml_result = upload_file($_FILES['xmlFile'], ['application/xml', 'text/xml'], "img/xml/");
         if (isset($xml_result['error'])) {
             $errors[] = $xml_result['error'];
         } else {
@@ -82,7 +79,6 @@ if ($row_check['count'] > 0) {
         }
     }
 
-    // Manejo de archivo de comprobante (imagen)
     $comprobante_path = '';
     if (isset($_FILES['comprobanteFile'])) {
         $comprobante_result = upload_file($_FILES['comprobanteFile'], ['image/jpeg', 'image/png', 'image/gif'], "img/comprobante/");
@@ -93,7 +89,6 @@ if ($row_check['count'] > 0) {
         }
     }
 
-    // Manejo de archivo de autorización (imagen)
     $autorizacion_path = '';
     if (isset($_FILES['autorizacionFile'])) {
         $autorizacion_result = upload_file($_FILES['autorizacionFile'], ['image/jpeg', 'image/png', 'image/gif'], "img/autorizacion/");
@@ -104,24 +99,19 @@ if ($row_check['count'] > 0) {
         }
     }
 
-    // Verificar si hubo errores en la carga de archivos
     if (!empty($errors)) {
         echo "<script>alert('Error al cargar los archivos: " . implode(", ", $errors) . "'); window.location.href = 'gastos.php';</script>";
     } else {
-        // Insertar datos en la base de datos si no existe un registro con el mismo UUID
         $sql = "INSERT INTO finanzas (fecha, rfc, proveedor, uuid, folio, referencia, observacion, subtotal, iva, total, status, xml_path, pdf_path, comprobante_path, autorizacion_path, id_vendedor)
-                VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', 1, '$xml_path', '$pdf_path', '$comprobante_path', '$autorizacion_path', '$id_vendedor')";
+                VALUES ('$fechaFormateada', '$rfc', '$proveedor', '$uuid', '$folio', '$referencia', '$observacion', '$subtotal', '$iva', '$total', '$status', '$xml_path', '$pdf_path', '$comprobante_path', '$autorizacion_path', '$id_vendedor')";
 
         if ($con->query($sql) === TRUE) {
-            // Mostrar alerta de éxito
             echo "<script>alert('El gasto ha sido guardado exitosamente.'); window.location.href = 'gastos.php';</script>";
         } else {
-            // Mostrar alerta de error
             echo "<script>alert('Error al guardar el gasto: " . $con->error . "');</script>";
         }
     }
 }
 
-// Cerrar conexión
 $con->close();
 ?>
