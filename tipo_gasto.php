@@ -106,7 +106,7 @@ h1 {
 
 .split.left {
     left: 0;
-    background: url('/img/gasto2.png');
+    background: url('img/gasto2.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -121,7 +121,7 @@ h1 {
 
 .split.right {
     right: 0;
-    background: url('/img/gasto1.png');
+    background: url('img/gasto1.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
