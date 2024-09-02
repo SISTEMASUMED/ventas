@@ -42,7 +42,7 @@
                             echo
                                 "
                             <li class='nav__item'>
-                                <a href='tipo_gastos.php' class='nav__link ".$active_finanzas."'>
+                                <a href='tipo_gasto.php' class='nav__link ".$active_finanzas."'>
                                     <i class='bx bx-credit-card-alt nav__icon'></i>
                                     <span class='nav__name'>GASTOS</span>
                                 </a>

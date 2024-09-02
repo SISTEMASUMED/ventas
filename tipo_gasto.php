@@ -26,7 +26,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Split Landing Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+	    <link rel=icon href='img/logo-icon.png' sizes="32x32" type="image/png">
+        <title>SUMED</title>
     </head>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -171,14 +173,15 @@ h1 {
     </style>
 
     <body>
+
         <div class="container">
             <div class="split left">
                 <h1>PDF y XML</h1>
-                <a href="" class="btn">Ingresar Gasto</a>
+                <a href="gastos.php" class="btn">Ingresar Gasto</a>
             </div>
             <div class="split right">
                 <h1>Comprobante y Autorización</h1>
-                <a href="" class="btn">Ingresar Gasto</a>
+                <a href="gastos.php" class="btn">Ingresar Gasto</a>
             </div>
         </div>
 
