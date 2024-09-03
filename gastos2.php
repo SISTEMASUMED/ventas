@@ -57,7 +57,6 @@
                 if ($rj_usuario1['is_admin'] == 1 || $rj_usuario1['is_admin'] == 5) {
                     echo "<a href='concentrado_gastos.php' class='btn btn-info'><span class='glyphicon glyphicon-download'></span> Reporte de Gastos</a>";
                 }
-                
             ?>
             </div>
         </div>
@@ -80,61 +79,10 @@
     $result = $con->query($sql);
 
     if($result->num_rows > 0) {
-        // Primera tabla: todos los gastos
-        echo "<div class='table-responsive'><table class='table table-striped' id='myTable'>
-        <tr>
-        <th>Fecha</th>
-        <th>RFC</th>
-        <th>Nombre del Proveedor</th>
-        <th>UUID</th>
-        <th>Folio</th>
-        <th>Referencia</th>
-        <th>Observación</th>
-        <th>Colaborador</th>
-        <th>Subtotal</th>
-        <th>IVA</th>
-        <th>Total</th>
-        <th>Acciones</th>
-        </tr>";
-        
-        while($row = $result->fetch_assoc()) {
-            $fecha = date_create($row["fecha"]);
-
-            echo "<tr>";
-            echo "<td>" . date_format($fecha, "d/m/Y") . "</td>";
-            echo "<td>" . $row["rfc"] . "</td>";
-            echo "<td>" . $row["proveedor"] . "</td>";
-            echo "<td>" . $row["uuid"] . "</td>";
-            echo "<td>" . $row["folio"] . "</td>";
-            echo "<td>" . $row["referencia"] . "</td>";
-            echo "<td>" . $row["observacion"] . "</td>";
-            echo "<td>" . $row["nombre_vendedor"] . "</td>";
-            echo "<td>$" . number_format($row["subtotal"], 2, ".", ",") . "</td>";
-            echo "<td>$" . number_format($row["iva"], 2, ".", ",") . "</td>";
-            echo "<td>$" . number_format($row["total"], 2, ".", ",") . "</td>";
-            echo "<td>";
-
-            if ($rj_usuario1['is_admin'] == 1) {
-                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
-                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
-                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
-                echo "<a href='eliminar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
-            } elseif ($rj_usuario1['is_admin'] == 2) {
-                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
-                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
-            } elseif ($rj_usuario1['is_admin'] == 5) {
-                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
-                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
-            }
-
-            echo "</td>";
-            echo "</tr>";
-        }
-        echo "</table></div>";
 
         // Segunda tabla: solo campos específicos
         echo "<h2>Resumen de Gastos</h2>";
-        echo "<div class='table-responsive'><table class='table table-striped' id='myTableResumen'>
+        echo "<div class='table-responsive'><table class='table table-striped' id='myTable'>
         <tr>
         <th>Fecha</th>
         <th>Colaborador/Colaboradora</th>

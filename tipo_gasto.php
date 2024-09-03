@@ -174,14 +174,15 @@ h1 {
 
     <body>
 
+
         <div class="container">
             <div class="split left">
                 <h1>PDF y XML</h1>
-                <a href="gastos.php" class="btn">Ingresar Gasto</a>
+                <a href="gastos1.php" class="btn">Ingresar Gasto</a>
             </div>
             <div class="split right">
-                <h1>Comprobante y Autorización</h1>
-                <a href="gastos.php" class="btn">Ingresar Gasto</a>
+                <h1>Ticket y Autorización</h1>
+                <a href="gastos2.php" class="btn">Ingresar Gasto</a>
             </div>
         </div>
 
