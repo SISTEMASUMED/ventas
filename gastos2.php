@@ -67,12 +67,12 @@
     // Consulta para mostrar todos los gastos
     if ($rj_usuario1['is_admin'] == 1) {
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
-                FROM finanzas f 
+                FROM finanzasta f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
                 WHERE f.status=1";
     } else {
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
-                FROM finanzas f 
+                FROM finanzasta f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
                 WHERE f.status=1 AND f.id_vendedor='$session_id2'";
     }
@@ -93,8 +93,6 @@
         <th>Observaciones</th>
         </tr>";
 
-        // Iterar nuevamente para la segunda tabla
-        $result->data_seek(0); // Reiniciar el puntero de resultados
         while($row = $result->fetch_assoc()) {
             $fecha = date_create($row["fecha"]);
 
@@ -106,7 +104,24 @@
             echo "<td>$" . number_format($row["iva"], 2, ".", ",") . "</td>";
             echo "<td>$" . number_format($row["total"], 2, ".", ",") . "</td>";
             echo "<td>" . $row["observacion"] . "</td>";
+            echo "<td>";
+
+            if ($rj_usuario1['is_admin'] == 1) {
+                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+                echo "<a href='eliminar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Eliminar'><i class='bx bx-trash'></i></a>";
+            } elseif ($rj_usuario1['is_admin'] == 2) {
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+                echo "<a href='editar_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Editar'><i class='bx bxs-edit-alt'></i></a>";
+            } elseif ($rj_usuario1['is_admin'] == 5) {
+                echo "<a href='descargar_excel_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Descargar Excel'><i class='bx bx-download'></i></a>";
+                echo "<a href='detalle_gasto.php?id_finanza=" . $row["id_finanza"] . "' title='Ver Detalle'><i class='bx bx-show'></i></a>";
+            }
+
+            echo "</td>";
             echo "</tr>";
+
         }
         echo "</table></div>";
     } else {
@@ -117,9 +132,6 @@
     <script>
         var tabla = document.querySelector("#myTable");
         var dataTable = new DataTable(tabla);
-
-        var tablaResumen = document.querySelector("#myTableResumen");
-        var dataTableResumen = new DataTable(tablaResumen);
     </script>
 
     <?php include("footer.php"); ?>

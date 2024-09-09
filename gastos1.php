@@ -67,12 +67,12 @@
     // Consulta para mostrar todos los gastos
     if ($rj_usuario1['is_admin'] == 1) {
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
-                FROM finanzas f 
+                FROM finanzaspx f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
                 WHERE f.status=1";
     } else {
         $sql = "SELECT f.*, u.nombre AS nombre_vendedor 
-                FROM finanzas f 
+                FROM finanzaspx f 
                 LEFT JOIN users u ON f.id_vendedor = u.user_id 
                 WHERE f.status=1 AND f.id_vendedor='$session_id2'";
     }
@@ -130,15 +130,14 @@
             echo "</tr>";
         }
         echo "</table></div>";
+    } else {
+        echo "No hay gastos.";
     }
     ?>
 
     <script>
         var tabla = document.querySelector("#myTable");
         var dataTable = new DataTable(tabla);
-
-        var tablaResumen = document.querySelector("#myTableResumen");
-        var dataTableResumen = new DataTable(tablaResumen);
     </script>
 
     <?php include("footer.php"); ?>
